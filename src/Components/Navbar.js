@@ -1,22 +1,41 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import Button from 'react-bootstrap/Button';
+import LogoYizBet from '../images/premierlogo.png'
 
-function Navbar() {
-    return (
-        <nav className="bg-black p-6">
-            
-            <div className="container mx-auto flex justify-between items-center">
-                <div className="text-white font-semibold text-xl">Yizbet</div>
-                
-                <div className="hidden lg:flex flex-grow items-center justify-center">
-                    <Link to="/euro24" className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4">Euro 2024</Link>
-                </div>
-                <div className="hidden lg:flex flex-grow items-start justify-start">
-                    <Link to="/" className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4">Accueil</Link>
-                </div>
-            </div>
-        </nav>
-    );
+function BasicExample() {
+  return (
+    <Navbar bg="dark" data-bs-theme="dark">
+      <Container>
+        <Navbar.Brand href="#home"><img  src={LogoYizBet} className='logoYizBet' /></Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="/" className='fontStrong'>Home</Nav.Link>
+            <Nav.Link href="/euro24" className='fontStrong'>Euro 2024</Nav.Link>
+            <NavDropdown title="Dropdown" className='fontStrong' id="basic-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">
+                Another action
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">
+                Separated link
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+          <div className="d-flex">
+            <Button variant="outline-light" className="me-2 fontStrong">S'inscrire</Button>
+            <Button variant="outline-light" className='fontStrong'>Se connecter</Button>
+          </div>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
 }
 
-export default Navbar;
+export default BasicExample;

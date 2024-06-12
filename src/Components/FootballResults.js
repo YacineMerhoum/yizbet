@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMatches } from '../slices/footballSlice'; 
+import traduction from '../traductions/traductions';
 
 const FootballResults = () => {
   const dispatch = useDispatch();
@@ -25,11 +26,19 @@ const FootballResults = () => {
     <div>
       <h2>Competition Name: {competition.name}</h2>
       <ul>
-        {matches.map((match, index) => (
-          <li key={index}>
-            {match.homeTeam.name} vs {match.awayTeam.name}
-          </li>
-        ))}
+        {matches.map((match, index) => {
+          const homeTeam = traduction[match.homeTeam.name] || { nom: match.homeTeam.name, image: "" };
+          const awayTeam = traduction[match.awayTeam.name] || { nom: match.awayTeam.name, image: "" };
+
+          return (
+            <li key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+              <img src={homeTeam.image}  style={{ width: '60px', height: '60px', marginRight: '10px' }} />
+              {homeTeam.nom} vs 
+              <img src={awayTeam.image} style={{ width: '60px', height: '60px', marginRight: '10px', marginLeft: '10px' }} />
+              {awayTeam.nom}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

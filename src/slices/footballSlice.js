@@ -1,8 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-
-// MATCHS EURO2024
 const URL = "https://api.football-data.org/v4/competitions/EC/matches";
 const API_KEY = '1a93aed1ad8b40d1af324616d76267c1';
 
@@ -40,7 +38,8 @@ const footballSlice = createSlice({
       .addCase(fetchMatches.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.competition = action.payload.competition;
-        state.matches = action.payload.matches;
+        // Limiter les matchs à 10
+        state.matches = action.payload.matches.slice(0, 10);
       })
       .addCase(fetchMatches.rejected, (state, action) => {
         state.status = 'failed';

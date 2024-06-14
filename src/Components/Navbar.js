@@ -6,6 +6,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import LogoYizBet from '../images/premierlogo.png'
 
+
 function BasicExample() {
   return (
     <Navbar bg="dark" data-bs-theme="dark">
@@ -13,7 +14,7 @@ function BasicExample() {
         <Navbar.Brand href="#home"><img  src={LogoYizBet} className='logoYizBet' /></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
+          <Nav className="me-auto navbarMobile">
             <Nav.Link href="/" className='fontStrong'>Home</Nav.Link>
             <Nav.Link href="/euro24" className='fontStrong'>Euro 2024</Nav.Link>
             <NavDropdown title="Dropdown" className='fontStrong' id="basic-nav-dropdown">
@@ -28,9 +29,9 @@ function BasicExample() {
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <div className="d-flex">
-            <Button variant="outline-light" className="me-2 fontStrong">S'inscrire</Button>
-            <Button variant="outline-light" className='fontStrong'>Se connecter</Button>
+          <div className="d-flex loginResp">
+            <Button variant="outline-light" className="me-2 fontStrong btnLogin">S'inscrire</Button>
+            <Button variant="outline-light" className='fontStrong btnLogin btn2'>Se connecter</Button>
           </div>
         </Navbar.Collapse>
       </Container>

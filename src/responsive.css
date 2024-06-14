@@ -1,0 +1,19 @@
+@media (max-width: 600px) {
+    .loginResp {
+        display: flex;
+        flex-direction: column;
+    }
+    .btnLogin {
+        height: 40px;
+        margin: 5px;
+        font-size: 10px;
+        color: chartreuse;
+    }
+    .btn2{
+        width: 67px;
+    }
+    .navbarMobile{
+        margin-left: -30px;
+    }
+    
+}

@@ -1,16 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMatchDetails, fetchMatchPortugal , fetchBetEuro , fetchBetPorTche } from "../slices/matchSlice";
+import { fetchMatchDetails, fetchMatchPortugal , fetchBetEuro , fetchBetPorTche , setChannelTv } from "../slices/matchSlice";
 import Carousel from "react-bootstrap/Carousel";
 import Button from "react-bootstrap/Button";
 import traduction from "../traductions/traductionsEuro";
-
+import channel1 from "../images/TV/TF1-logo.png"
 import FranceImg from "../images/france.jpg";
 import PortugalImg from "../images/equipePortugal.jpg";
 import LogoEuro24 from "../images/LogoCompetition/Euro2024.jpg";
 
 function DarkVariantExample() {
   const dispatch = useDispatch();
+  const diffusionTv = useSelector((state) => state.match.channelTv)
   const matchDetails = useSelector((state) => state.match.matchDetails);
   const betEuro = useSelector((state) => state.match.betEuro)
   const BetPorTche = useSelector((state) => state.match.BetPorTche)
@@ -18,15 +19,17 @@ function DarkVariantExample() {
   
   const status = useSelector((state) => state.match.status);
   const error = useSelector((state) => state.match.error);
-
-console.log(betEuro);
-
+  
+  
+  
   useEffect(() => {
     dispatch(fetchMatchDetails())
     dispatch(fetchMatchPortugal())
     dispatch(fetchBetEuro())
     dispatch(fetchBetPorTche())
   }, [dispatch]);
+
+
 
   if (status === "loading") {
     return <div>Chargement...</div>;
@@ -40,7 +43,11 @@ console.log(betEuro);
     return null;
   }
 
-  // CONVERTIR LA DATE EN FR
+
+
+  const currentDate = new Date();
+  const matchDate = new Date(matchDetails.utcDate);
+  const isToday = currentDate.getDate() === matchDate.getDate();
   const date = new Date(matchDetails.utcDate);
   const options = {
     weekday: "long",
@@ -55,9 +62,6 @@ console.log(betEuro);
   // Convertir la date pour le match du Portugal
   const datePortugal = new Date(matchDetailsPortugal.utcDate);
   const formattedDatePortugal = datePortugal.toLocaleString("fr-FR", options);
-
-
-
 
   return (
     <Carousel data-bs-theme="dark">
@@ -80,18 +84,21 @@ console.log(betEuro);
               {traduction[matchDetails.awayTeam.name]}
             </h2>
             <img className="LogoCompet" src={LogoEuro24} />
-            <p>{matchDetails.venue}</p>
+            <p className="venueGame">{matchDetails.venue}</p>
             <p>
-              <em>{formattedDate}</em>
+            <em className="dateGame">{isToday ? 'Ce soir' : formattedDate}</em>
+            <img className="ms-2" style={{ height: "15px" }} src={channel1} />
+
+            
             </p>
             <Button variant="light" className="m-1 btn_betOdds">
-            {betEuro.homeTeamOdds}
+            {/* {betEuro.homeTeamOdds}
             </Button>
             <Button variant="light" className="m-1 btn_betOdds">
             {betEuro.drawOdds}
             </Button>
             <Button variant="light" className="m-1 btn_betOdds">
-            {betEuro.awayTeamOdds}
+            {betEuro.awayTeamOdds} */}
             </Button>
           </div>
         </Carousel.Caption>
@@ -122,9 +129,10 @@ console.log(betEuro);
             <img className="LogoCompet" src={LogoEuro24} />
             <p>{matchDetailsPortugal.venue}</p>
             <p>
-              <em>{formattedDatePortugal}</em>
+              <em className="dateGame">{formattedDatePortugal}</em>
+              
             </p>
-            <Button variant="light" className="m-1 btn_betOdds">
+            {/* <Button variant="light" className="m-1 btn_betOdds">
             {BetPorTche.awayTeamOdds}
             </Button>
             <Button variant="light" className="m-1 btn_betOdds">
@@ -132,7 +140,7 @@ console.log(betEuro);
             </Button>
             <Button variant="light" className="m-1 btn_betOdds">
             {BetPorTche.homeTeamOdds}
-            </Button>
+            </Button> */}
           </div>
         </Carousel.Caption>
       </Carousel.Item>

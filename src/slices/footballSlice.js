@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const URL = "https://api.football-data.org/v4/competitions/EC/matches";
+const URL = "https://api.football-data.org/v4/competitions/EC/standings";
 const API_KEY = '1a93aed1ad8b40d1af324616d76267c1';
 
-export const fetchMatches = createAsyncThunk(
-  'football/fetchMatches',
+export const fetchStandings = createAsyncThunk(
+  'football/fetchStandings',
   async () => {
     try {
       const response = await axios.get(URL, {
@@ -13,10 +13,26 @@ export const fetchMatches = createAsyncThunk(
           'X-Auth-Token': API_KEY,
         }
       });
-      const { competition, matches } = response.data;
-      return { competition, matches };
+      const { standings } = response.data;
+      return standings;
     } catch (error) {
       throw new Error(error.message);
+    }
+  }
+);
+
+export const bestScored = createAsyncThunk(
+  'match/bestScored',
+  async () => {
+    try {
+      const response = await axios.get('https://api.football-data.org/v4/competitions/EC/scorers', {
+        headers: {
+          'X-Auth-Token': '1a93aed1ad8b40d1af324616d76267c1'
+        }
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error('Les buteurs ne sont pas disponibles !');
     }
   }
 );
@@ -24,28 +40,37 @@ export const fetchMatches = createAsyncThunk(
 const footballSlice = createSlice({
   name: 'football',
   initialState: {
-    competition: {},
-    matches: [],
+    bestScored: [],
+    standings: [],
     status: 'idle',
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchMatches.pending, (state) => {
+      .addCase(fetchStandings.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchMatches.fulfilled, (state, action) => {
+      .addCase(fetchStandings.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.competition = action.payload.competition;
-        // Limiter les matchs à 10
-        state.matches = action.payload.matches.slice(0, 10);
+        state.standings = action.payload;
       })
-      .addCase(fetchMatches.rejected, (state, action) => {
+      .addCase(fetchStandings.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
-      });
+      })
+      .addCase(bestScored.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(bestScored.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.bestScored = action.payload;
+      })
+      .addCase(bestScored.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
   },
-});
+})
 
 export default footballSlice.reducer;

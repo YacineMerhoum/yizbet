@@ -1,15 +1,16 @@
 import Carousel from 'react-bootstrap/Carousel';
-import { fetchHongrieSuisse , fetchBetHongrieSuisse , fetchMatch4 } from "../slices/matchSlice"
+import { fetchHongrieSuisse , fetchBetHongrieSuisse , fetchMatch4 , fetchOddsMatch4 } from "../slices/matchSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect } from "react";
-import imgSuisse from "../images/suisse.jpg"
-import imgTeam from "../images/italy.jpg"
+import imgTeam2 from "../images/germany.webp"
+import imgTeam from "../images/england.jpeg"
 import LogoEuro24 from "../images/LogoCompetition/Euro2024.jpg"
 import Button from "react-bootstrap/Button";
 import traduction from "../traductions/traductionsEuro";
 
 function DarkVariantExample() {
   const dispatch = useDispatch()
+  const oddsMatch4 = useSelector((state) => state.match.oddsMatch4)
   const match4 = useSelector((state) => state.match.match4)
   const matchHongrieSuisse = useSelector((state) => state.match.hongrieSuisse)
   const status = useSelector((state) => state.match.status);
@@ -20,6 +21,7 @@ function DarkVariantExample() {
     dispatch(fetchHongrieSuisse())
     dispatch(fetchBetHongrieSuisse())
     dispatch(fetchMatch4())
+    dispatch(fetchOddsMatch4())
   }, [dispatch]);
 
   if (status === "loading") {
@@ -56,7 +58,7 @@ function DarkVariantExample() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src={imgSuisse}
+          src={imgTeam2}
           alt="First slide"
           style={{ objectFit: "cover", height: "400px" }}
         />
@@ -71,18 +73,19 @@ function DarkVariantExample() {
               {traduction[matchHongrieSuisse.awayTeam.name]}
             </h2>
             <img className="LogoCompet" src={LogoEuro24} />
+            <h1 className='text-danger'> {matchHongrieSuisse.score.fullTime.home} {matchHongrieSuisse.score.fullTime.away} </h1>
             <p>{matchHongrieSuisse.venue}</p>
             <p>
-              <em>{formattedDate}</em>
+              <em className='dateGame'>{formattedDate}</em>
             </p>
             <Button variant="light" className="m-1 btn_betOdds">
-            {betHongrieSuise.homeTeamOdds}
+            {/* {betHongrieSuise.awayTeamOdds}
             </Button>
             <Button variant="light" className="m-1 btn_betOdds">
             {betHongrieSuise.drawOdds}
             </Button>
             <Button variant="light" className="m-1 btn_betOdds">
-            {betHongrieSuise.awayTeamOdds}
+            {betHongrieSuise.homeTeamOdds} */}
             </Button>
           </div>
         </Carousel.Caption>
@@ -105,18 +108,19 @@ function DarkVariantExample() {
               {traduction[match4.awayTeam.name]}
             </h2>
             <img className="LogoCompet" src={LogoEuro24} />
+            <h1 className='text-danger'> {match4.score.fullTime.home} {match4.score.fullTime.away} </h1>
             <p>{match4.venue}</p>
             <p>
-              <em>{formattedDate}</em>
+              <em className='dateGame'>{formattedDate}</em>
             </p>
             <Button variant="light" className="m-1 btn_betOdds">
-            {betHongrieSuise.homeTeamOdds}
+            {oddsMatch4.homeTeamOdds}
             </Button>
             <Button variant="light" className="m-1 btn_betOdds">
-            {betHongrieSuise.drawOdds}
+            {oddsMatch4.drawOdds}
             </Button>
             <Button variant="light" className="m-1 btn_betOdds">
-            {betHongrieSuise.awayTeamOdds}
+            {oddsMatch4.awayTeamOdds}
             </Button>
           </div>
         </Carousel.Caption>

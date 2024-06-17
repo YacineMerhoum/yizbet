@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import Carousel from "../Components/Carousel";
 import Carousel2 from "../Components/Carousel2";
 import Section from "../Components/Section";
+import Footer from "../Components/Footer";
 
 const Home = () => {
   return (
@@ -23,6 +24,7 @@ const Home = () => {
         </Col>
       </Row>
       <Section/>
+      <Footer />
 
     </>
   );

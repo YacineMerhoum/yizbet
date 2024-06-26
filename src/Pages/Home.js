@@ -6,6 +6,7 @@ import Carousel from "../Components/Carousel";
 import Carousel2 from "../Components/Carousel2";
 import Section from "../Components/Section";
 import Footer from "../Components/Footer";
+import SectionPub from "../Components/SectionPub";
 
 const Home = () => {
   return (
@@ -24,6 +25,7 @@ const Home = () => {
         </Col>
       </Row>
       <Section/>
+      <SectionPub />
       <Footer />
 
     </>

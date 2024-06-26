@@ -48,8 +48,8 @@ code {
 .btn_betOdds:hover {
   transition: 0.3s;
   background-color: rgb(0, 0, 0) !important;
-  color: greenyellow !important;
-  border: 1px solid greenyellow;
+  color:yellow;
+  border: 1px solid yellow;
 }
 
 .crestTeam{
@@ -107,4 +107,9 @@ code {
 }
 .dateGame , .venueGame{
   font-weight:900;
+}
+
+/* PLACEHOLDER SKALTON  */
+.carouselPlaceholder {
+  
 }

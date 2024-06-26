@@ -11,7 +11,7 @@ function BasicExample() {
   return (
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
-        <Navbar.Brand href="#home"><img  src={LogoYizBet} className='logoYizBet' /></Navbar.Brand>
+        <Navbar.Brand href="/"><img  src={LogoYizBet} className='logoYizBet' /></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto navbarMobile">

@@ -1,54 +1,59 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMatchDetails, fetchMatchPortugal , fetchBetEuro , fetchBetPorTche , setChannelTv } from "../slices/matchSlice";
+import { fetchMatchDetails, oddsMatchs, fetchBetPorTche } from "../slices/matchSlice";
 import Carousel from "react-bootstrap/Carousel";
-import Button from "react-bootstrap/Button";
 import traduction from "../traductions/traductionsEuro";
-import channel1 from "../images/TV/TF1-logo.png"
-import FranceImg from "../images/france.jpg";
-import PortugalImg from "../images/equipePortugal.jpg";
+import channel1 from "../images/TV/beinsport.png";
+import Team1Img from "../images/belgium.jpeg";
+import PortugalImg from "../images/roumania.jpg";
 import LogoEuro24 from "../images/LogoCompetition/Euro2024.jpg";
+import Button from "react-bootstrap/Button";
 
 function DarkVariantExample() {
   const dispatch = useDispatch();
-  const diffusionTv = useSelector((state) => state.match.channelTv)
   const matchDetails = useSelector((state) => state.match.matchDetails);
-  const betEuro = useSelector((state) => state.match.betEuro)
-  const BetPorTche = useSelector((state) => state.match.BetPorTche)
-  const matchDetailsPortugal = useSelector((state) => state.match.matchDetailsPortugal); // Ajoute cette ligne pour récupérer les détails du match du Portugal
+  const matchOdds = useSelector((state) => state.match.betGames)
   
-  const status = useSelector((state) => state.match.status);
-  const error = useSelector((state) => state.match.error);
-  
-  
-  
+  if (matchOdds) {
+    console.log(matchOdds.data[4].bookmakers[0].markets[0].outcomes);
+
+    }
+
+
   useEffect(() => {
-    dispatch(fetchMatchDetails())
-    dispatch(fetchMatchPortugal())
-    dispatch(fetchBetEuro())
-    dispatch(fetchBetPorTche())
+    dispatch(fetchMatchDetails());
+    dispatch(oddsMatchs());
+    dispatch(fetchBetPorTche());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (matchDetails) {
+      console.log(matchDetails.data.matches[13].homeTeam.crest, "hey je suis de retour en mieux !");
+      console.log(matchDetails.data.matches[13].awayTeam.crest, "hey je suis de retour en mieux !");
+    }
+  }, [matchDetails]);
 
 
-  if (status === "loading") {
-    return <div>Chargement...</div>;
-  }
-
-  if (status === "failed") {
-    return <div>Désolé il ya un bug : {error}</div>;
-  }
-
-  if (!matchDetails || !matchDetailsPortugal ) {
+  if (!matchDetails || !matchOdds ) {
     return null;
   }
 
+  const gameOne = 32
+  const gameTwo = 33
 
+  // MATCH 1
+   const homeTeamOdd1 = matchOdds.data[4].bookmakers[0].markets[0].outcomes[0].price;
+   const DrawGamemOdd1 = matchOdds.data[4].bookmakers[0].markets[0].outcomes[2].price;
+   const awayTeamOdd1 = matchOdds.data[4].bookmakers[0].markets[0].outcomes[1].price;
+
+  //  MATCH 2
+   const homeTeamOdd2 = matchOdds.data[4].bookmakers[0].markets[0].outcomes[0].price;
+   const DrawGamemOdd2 = matchOdds.data[4].bookmakers[0].markets[0].outcomes[2].price;
+   const awayTeamOdd2 = matchOdds.data[4].bookmakers[0].markets[0].outcomes[1].price;
 
   const currentDate = new Date();
-  const matchDate = new Date(matchDetails.utcDate);
+  const matchDate = new Date(matchDetails.data.matches[gameOne].utcDate);
   const isToday = currentDate.getDate() === matchDate.getDate();
-  const date = new Date(matchDetails.utcDate);
   const options = {
     weekday: "long",
     year: "numeric",
@@ -57,48 +62,44 @@ function DarkVariantExample() {
     hour: "numeric",
     minute: "numeric",
   };
-  const formattedDate = date.toLocaleString("fr-FR", options);
+  const formattedDate = matchDate.toLocaleString("fr-FR", options);
 
-  // Convertir la date pour le match du Portugal
-  const datePortugal = new Date(matchDetailsPortugal.utcDate);
-  const formattedDatePortugal = datePortugal.toLocaleString("fr-FR", options);
+  const dateFr = new Date(matchDetails.data.matches[gameOne].utcDate);
+  const formattedDateGame = dateFr.toLocaleString("fr-FR", options);
 
   return (
     <Carousel data-bs-theme="dark">
-      {/* 1er match  */}
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src={FranceImg}
+          src={Team1Img}
           alt="First slide"
           style={{ objectFit: "cover", height: "400px" }}
         />
         <Carousel.Caption>
           <div className="carouselBg">
-            <img className="flagMenu" src={matchDetails.homeTeam.crest} />
-            <img className="flagMenu" src={matchDetails.awayTeam.crest} />
+            <img className="flagMenu" src={matchDetails.data.matches[gameOne].homeTeam.crest} alt="Home Team Crest" />
+            <img className="flagMenu" src={matchDetails.data.matches[gameOne].awayTeam.crest} alt="Away Team Crest" />
 
             <h2>
-              {traduction[matchDetails.homeTeam.name]}{" "}
-              <span className="me-2">vs</span>
-              {traduction[matchDetails.awayTeam.name]}
+              {traduction[matchDetails.data.matches[gameOne].homeTeam.name]}
+              <span className="me-2"> vs </span>
+              {traduction[matchDetails.data.matches[gameOne].awayTeam.name]}
             </h2>
-            <img className="LogoCompet" src={LogoEuro24} />
-            <p className="venueGame">{matchDetails.venue}</p>
+            <img className="LogoCompet" src={LogoEuro24} alt="Competition Logo" />
+            <p className="venueGame">{matchDetails.data.matches[gameOne].venue}</p>
             <p>
-            <em className="dateGame">{isToday ? 'Ce soir' : formattedDate}</em>
-            <img className="ms-2" style={{ height: "15px" }} src={channel1} />
-
-            
+              <em className="dateGame">{isToday ? 'Ce soir' : formattedDate}</em>
+              <img className="ms-2" style={{ height: "15px" }} src={channel1} alt="Channel Logo" />
             </p>
             <Button variant="light" className="m-1 btn_betOdds">
-            {/* {betEuro.homeTeamOdds}
+            {homeTeamOdd1}
             </Button>
             <Button variant="light" className="m-1 btn_betOdds">
-            {betEuro.drawOdds}
+            {DrawGamemOdd1}
             </Button>
             <Button variant="light" className="m-1 btn_betOdds">
-            {betEuro.awayTeamOdds} */}
+            {awayTeamOdd1}
             </Button>
           </div>
         </Carousel.Caption>
@@ -112,52 +113,24 @@ function DarkVariantExample() {
         />
         <Carousel.Caption>
           <div className="carouselBg">
-            <img
-              className="flagMenu"
-              src={matchDetailsPortugal.homeTeam.crest}
-            />
-            <img
-              className="flagMenu"
-              src={matchDetailsPortugal.awayTeam.crest}
-            />
+            <img className="flagMenu" src={matchDetails.data.matches[gameTwo].homeTeam.crest} alt="Home Team Crest" />
+            <img className="flagMenu" src={matchDetails.data.matches[gameTwo].awayTeam.crest} alt="Away Team Crest" />
 
             <h2>
-              {traduction[matchDetailsPortugal.homeTeam.name]}{" "}
+              {traduction[matchDetails.data.matches[gameTwo].homeTeam.name]}{" "}
               <span className="me-2">vs</span>
-              {traduction[matchDetailsPortugal.awayTeam.name]}
+              {traduction[matchDetails.data.matches[gameTwo].awayTeam.name]}
             </h2>
-            <img className="LogoCompet" src={LogoEuro24} />
-            <p>{matchDetailsPortugal.venue}</p>
+            <img className="LogoCompet" src={LogoEuro24} alt="Competition Logo" />
+            <p>{matchDetails.data.matches[gameTwo].venue}</p>
             <p>
-              <em className="dateGame">{formattedDatePortugal}</em>
-              
+              <em className="dateGame">{formattedDateGame}</em>
+              <img className="ms-2" style={{ height: "15px" }} src={channel1} alt="Channel Logo" />
+
             </p>
-            {/* <Button variant="light" className="m-1 btn_betOdds">
-            {BetPorTche.awayTeamOdds}
-            </Button>
-            <Button variant="light" className="m-1 btn_betOdds">
-            {BetPorTche.drawOdds}
-            </Button>
-            <Button variant="light" className="m-1 btn_betOdds">
-            {BetPorTche.homeTeamOdds}
-            </Button> */}
           </div>
         </Carousel.Caption>
       </Carousel.Item>
-      {/* <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="holder.js/800x400?text=Third slide&bg=e5e5e5"
-          alt="Third slide"
-          style={{ objectFit: "cover", height: "400px" }}
-        />
-        <Carousel.Caption>
-          <h5>Third slide label</h5>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item> */}
     </Carousel>
   );
 }

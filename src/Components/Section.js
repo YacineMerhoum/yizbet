@@ -46,10 +46,10 @@ const Section = () => {
       <div className="text-section1"></div>
       <div className="text-center section1">
         <h3 className="text-white text-center mb-5 text-warning">
-          <em>Les gros MATCHS du jour</em>
+          <em>Les gros MATCHS du jour </em>🔥
         </h3>
         <div className="row justify-content-between">
-          <div className="col">
+          <div className="col-12 col-md-6">
             {listGameDay.matches[0] ? (
               <>
                 {listGameDay.matches[1].hasStarted && (
@@ -73,7 +73,7 @@ const Section = () => {
               </>
             )}
           </div>
-          <div className="col">
+          <div className="col-12 col-md-6">
             {listGameDay.matches[1] ? (
               <>
                 {listGameDay.matches[0].hasStarted && (

@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMatchDetails, oddsMatchs, fetchBetPorTche } from "../slices/matchSlice";
+import { fetchMatchDetails, oddsMatchs } from "../slices/matchSlice";
 import Carousel from "react-bootstrap/Carousel";
 import traduction from "../traductions/traductionsEuro";
-import channel1 from "../images/TV/beinsport.png";
-import Team1Img from "../images/belgium.jpeg";
-import PortugalImg from "../images/roumania.jpg";
+import channel1 from "../images/TV/TF1-logo.png";
+import channel2 from "../images/TV/beinsport.png";
+import Team1Img from "../images/italy.avif";
+import PortugalImg from "../images/germany.webp";
 import LogoEuro24 from "../images/LogoCompetition/Euro2024.jpg";
 import Button from "react-bootstrap/Button";
 
@@ -23,7 +24,7 @@ function DarkVariantExample() {
   useEffect(() => {
     dispatch(fetchMatchDetails());
     dispatch(oddsMatchs());
-    dispatch(fetchBetPorTche());
+
   }, [dispatch]);
 
   useEffect(() => {
@@ -38,8 +39,8 @@ function DarkVariantExample() {
     return null;
   }
 
-  const gameOne = 32
-  const gameTwo = 33
+  const gameOne = 36
+  const gameTwo = 37
 
   // MATCH 1
    const homeTeamOdd1 = matchOdds.data[4].bookmakers[0].markets[0].outcomes[0].price;
@@ -90,7 +91,7 @@ function DarkVariantExample() {
             <p className="venueGame">{matchDetails.data.matches[gameOne].venue}</p>
             <p>
               <em className="dateGame">{isToday ? 'Ce soir' : formattedDate}</em>
-              <img className="ms-2" style={{ height: "15px" }} src={channel1} alt="Channel Logo" />
+              <img className="ms-2" style={{ height: "15px" }} src={channel2} alt="Channel Logo" />
             </p>
             <Button variant="light" className="m-1 btn_betOdds">
             {homeTeamOdd1}
@@ -124,7 +125,7 @@ function DarkVariantExample() {
             <img className="LogoCompet" src={LogoEuro24} alt="Competition Logo" />
             <p>{matchDetails.data.matches[gameTwo].venue}</p>
             <p>
-              <em className="dateGame">{formattedDateGame}</em>
+            <em className="dateGame">{isToday ? 'Ce soir' : formattedDateGame}</em>
               <img className="ms-2" style={{ height: "15px" }} src={channel1} alt="Channel Logo" />
 
             </p>

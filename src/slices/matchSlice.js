@@ -32,6 +32,7 @@ export const oddsMatchs = createAsyncThunk(
 
 
 
+
 // COTES DES MATCHS 
 export const fetchBetEuro = createAsyncThunk(
   'match/fetchBetEuro',
@@ -52,46 +53,10 @@ export const fetchBetEuro = createAsyncThunk(
     }
   }
 );
-export const fetchBetPorTche = createAsyncThunk(
-  'match/fetchBetPorTche',
-  async () => {
-    try {
-      const response = await axios.get('https://api.the-odds-api.com/v4/sports/soccer_uefa_european_championship/events/0306e48b770a93617e4059d69e43aee2/odds?regions=eu&oddsFormat=decimal&apiKey=98ff544b7a7c7c2b7ab4885362a8c174');
-      const oddsData = response.data;
-      const homeTeamOdds = oddsData?.bookmakers[0]?.markets[0]?.outcomes[0]?.price || null;
-      const awayTeamOdds = oddsData?.bookmakers[0]?.markets[0]?.outcomes[1]?.price || null;
-      const drawOdds = oddsData?.bookmakers[0]?.markets[0]?.outcomes[2]?.price || null;
-      return {
-        homeTeamOdds,
-        drawOdds,
-        awayTeamOdds,
-      };
-    } catch (error) {
-      throw new Error('Côtes non disponibles');
-    }
-  }
-);
 
 
-export const fetchOddsMatch4 = createAsyncThunk(
-  'match/fetchOddsMatch4',
-  async () => {
-    try {
-      const response = await axios.get('https://api.the-odds-api.com/v4/sports/soccer_uefa_european_championship/events/a6c58cea1f1a3175f5663883713ec3f2/odds?regions=eu&oddsFormat=decimal&apiKey=98ff544b7a7c7c2b7ab4885362a8c174');
-      const oddsData = response.data;
-      const homeTeamOdds = oddsData?.bookmakers[0]?.markets[0]?.outcomes[0]?.price || null;
-      const awayTeamOdds = oddsData?.bookmakers[0]?.markets[0]?.outcomes[1]?.price || null;
-      const drawOdds = oddsData?.bookmakers[0]?.markets[0]?.outcomes[2]?.price || null;
-      return {
-        homeTeamOdds,
-        drawOdds,
-        awayTeamOdds,
-      };
-    } catch (error) {
-      throw new Error('Côtes non disponibles');
-    }
-  }
-);
+
+
 
 const initialState = {
   channelTv: {
@@ -154,17 +119,7 @@ const matchSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message;
       })
-      .addCase(fetchBetPorTche.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchBetPorTche.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.BetPorTche = action.payload;
-      })
-      .addCase(fetchBetPorTche.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
-      })
+
       
       // TEST JSON
       .addCase(oddsMatchs.pending, (state) => {
@@ -179,18 +134,6 @@ const matchSlice = createSlice({
         state.error = action.error.message;
       })
       
-      // MATCH 4
-      .addCase(fetchOddsMatch4.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchOddsMatch4.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.oddsMatch4 = action.payload;
-      })
-      .addCase(fetchOddsMatch4.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
-      })
       
 
   },

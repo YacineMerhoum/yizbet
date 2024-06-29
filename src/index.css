@@ -110,6 +110,14 @@ code {
 }
 
 /* PLACEHOLDER SKALTON  */
-.carouselPlaceholder {
+
+
+.btnWatchAllGame{
+  background-color:#252424 !important;
+  border-color: gold;
+}
+.btnWatchAllGame:hover{
+  transition: 0.4s;
+  background-color:#363333 !important;
   
 }

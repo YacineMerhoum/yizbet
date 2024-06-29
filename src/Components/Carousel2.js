@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMatchDetails, oddsMatchs, fetchBetPorTche } from "../slices/matchSlice";
+import { fetchMatchDetails, oddsMatchs } from "../slices/matchSlice";
 import Carousel from "react-bootstrap/Carousel";
 import Button from "react-bootstrap/Button";
 import traduction from "../traductions/traductionsEuro";
 import channel1 from "../images/TV/beinsport.png";
 import channel2 from "../images/TV/m6.png";
-import Team1Img from "../images/daenamrk.jpg";
-import PortugalImg from "../images/england.jpeg";
+import Team1Img from "../images/england.jpeg";
+import PortugalImg from "../images/Espagne.jpg";
 import LogoEuro24 from "../images/LogoCompetition/Euro2024.jpg";
 
 
@@ -25,7 +25,6 @@ function DarkVariantExample() {
   useEffect(() => {
     dispatch(fetchMatchDetails());
     dispatch(oddsMatchs());
-    dispatch(fetchBetPorTche());
   }, [dispatch]);
 
   useEffect(() => {
@@ -40,8 +39,8 @@ function DarkVariantExample() {
     return null;
   }
 
-  const gameOne = 30
-  const gameTwo = 31
+  const gameOne = 38
+  const gameTwo = 39
 
     // MATCH 1
     const homeTeamOdd1 = matchOdds.data[1].bookmakers[0].markets[0].outcomes[0].price;

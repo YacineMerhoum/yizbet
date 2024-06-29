@@ -7,8 +7,12 @@ import Carousel2 from "../Components/Carousel2";
 import Section from "../Components/Section";
 import Footer from "../Components/Footer";
 import SectionPub from "../Components/SectionPub";
+import MyFunBet from "../Components/MyFunBet";
+
 
 const Home = () => {
+ 
+
   return (
     <>
       <Navbar />
@@ -24,10 +28,12 @@ const Home = () => {
           </div>
         </Col>
       </Row>
-      <Section/>
+      <Section />
       <SectionPub />
+      <div style={{ transition: 'opacity 0.5s' }}>
+        <MyFunBet />
+      </div>
       <Footer />
-
     </>
   );
 };

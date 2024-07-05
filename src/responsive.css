@@ -24,12 +24,39 @@
        height: 100%;
          
      }
-    
-    
+     .logoResponsive{
+        height: 200px;
+     }
+     .noChildren{
+        font-size: 13px;
+        margin-top: -29px !important
+     }
+     .buttonLogin{
+        margin-left: 20%;
+     }
+     .inputs {
+        width: 200px !important;
+        margin-left: -58px !important;
+     }
+     .sizeImg2{
+       display: none;
+     }
+     
 }
+    
+    
+
 /* IPAD ECT.. */
 @media (min-width: 600px) and (max-width: 810px) {
     .tableStanding {
         margin-left: 10%;
     }
-}
+    .buttonLogin{
+        margin-left: 40%;
+     }
+     .inputs {
+        width: 300px !important;
+        margin-left: -58px !important;
+     }
+     
+    }

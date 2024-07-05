@@ -5,6 +5,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { oddsMatchs } from "../slices/matchSlice";
 import useIntersectionObserver from "../hooks/useIntersectionObserver";
 import Button from 'react-bootstrap/Button';
+import { Link } from "react-router-dom";
 
 const MyFunBet = () => {
   const listGameDay = useSelector((state) => state.match.betGames);
@@ -26,6 +27,9 @@ const MyFunBet = () => {
         <Skeleton height={20} width={100} />
       </div>
     );
+  }
+  function scrollToTop() {
+    window.scrollTo(0, 0);
   }
 
   const matchOne = 4;
@@ -66,10 +70,11 @@ const MyFunBet = () => {
             </p>
           </div>
         </div>
-        <Button className="m-5 btnWatchAllGame " variant="secondary" size="lg" 
-        style={{ fontWeight: "bold" , color: "#ffed00" }}>
-        <em>Voir les MATCHS éxotiques du jour </em><span> 🤑</span>
-      </Button>
+        <Link to="/games-exotics">
+          <Button className="m-5 btnWatchAllGame" onClick={scrollToTop} variant="secondary" size="lg" style={{ fontWeight: "bold", color: "#ffed00" }}>
+            <em>Voir les MATCHS éxotiques du jour </em><span> 🤑</span>
+          </Button>
+        </Link>
       </div>
     </>
   );

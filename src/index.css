@@ -121,3 +121,58 @@ code {
   background-color:#363333 !important;
   
 }
+
+.logoEntrance{
+  animation: logoEntrance 2.5s ease 0s 1 normal forwards;
+}
+.welcomeEntrance{
+  animation: logoEntrance 2s ease 0s 1 normal forwards;
+}
+.welcome{
+  height: 100px;
+  width: 500px;
+}
+@keyframes logoEntrance {
+	0% {
+		opacity: 0;
+		transform: translateY(-250px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.haveAccount {
+  animation: haveAccount 2s ease 0s 1 normal forwards;
+}
+@keyframes haveAccount {
+	0% {
+		opacity: 0;
+		transform: translateY(250px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+.sizeImg{
+  height: 150px;
+}
+
+.coin {
+  height: 30px;
+}
+
+.noChildren{
+  color: white;
+  margin-left:30%;
+  margin-right: 30%;
+   margin-top: 5%
+}
+.buttonLogin{
+  margin-left: 42%;
+}
+

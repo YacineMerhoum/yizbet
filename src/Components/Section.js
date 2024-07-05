@@ -12,6 +12,7 @@ const Section = () => {
 
 
 
+
   console.log(listGameDay , "Hello je suis la pour aider !" );
   const test = listGameDay
 
@@ -20,6 +21,7 @@ const Section = () => {
     dispatch(fetchMatchDay());
   }, [dispatch]);
 
+ 
 
   if (!listGameDay || !listGameDay.matches) {
     return null;

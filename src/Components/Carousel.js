@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMatchDetails, oddsMatchs } from "../slices/matchSlice";
 import Carousel from "react-bootstrap/Carousel";
 import traduction from "../traductions/traductionsEuro";
-import channel1 from "../images/TV/TF1-logo.png";
-import channel2 from "../images/TV/beinsport.png";
-import Team1Img from "../images/italy.avif";
-import PortugalImg from "../images/germany.webp";
+import channel1 from "../images/TV/m6.png";
+import channel2 from "../images/TV/TF1-logo.png";
+import Team1Img from "../images/Espagne.jpg";
+import PortugalImg from "../images/france2.jpg";
 import LogoEuro24 from "../images/LogoCompetition/Euro2024.jpg";
 import Button from "react-bootstrap/Button";
 
@@ -39,8 +39,8 @@ function DarkVariantExample() {
     return null;
   }
 
-  const gameOne = 36
-  const gameTwo = 37
+  const gameOne = 44
+  const gameTwo = 45
 
   // MATCH 1
    const homeTeamOdd1 = matchOdds.data[4].bookmakers[0].markets[0].outcomes[0].price;

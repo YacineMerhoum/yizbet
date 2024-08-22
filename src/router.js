@@ -6,6 +6,10 @@ import Euro24 from "./Pages/Euro24";
 import Login from "./Pages/Login";
 import GamesExotics from "./Pages/GamesExotics";
 import Register from "./Pages/Register";
+import Tokens from "./Pages/Tokens";
+
+import TermsAndConditions from "./Pages/TermsAndConditions";
+import About from "./Pages/About";
 
 
 const router = createBrowserRouter([
@@ -33,6 +37,19 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register />,
   },
+  {
+    path: "/tokens",
+    element: <Tokens />,
+  },
+  {
+   path: "/conditions",
+   element:<TermsAndConditions />
+
+  },
+  {
+    path: "/about-us",
+    element: <About />
+  }
 ]);
 
 export default router;

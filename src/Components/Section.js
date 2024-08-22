@@ -47,7 +47,7 @@ const Section = () => {
        
       <div className="text-section1"></div>
       <div className="text-center section1">
-        <h3 className="text-white text-center mb-5 text-warning">
+        <h3 className="text-white text-center mb-5 text-warning fontArchivoBold">
           <em>Les gros MATCHS du jour </em>🔥
         </h3>
         <div className="row justify-content-between">

@@ -10,7 +10,7 @@ export const fetchMatchDetails = createAsyncThunk(
   'match/fetchMatchDetails',
   async () => {
     
-      const response = await axios.get('http://localhost:3007/data/matchesRoute.json', {
+      const response = await axios.get('http://localhost:3008/data/matchesRoute.json', {
         
       });
       return response.data;
@@ -22,7 +22,7 @@ export const oddsMatchs = createAsyncThunk(
   'match/oddsMatchs',
   async () => {
     
-    const response = await axios.get('http://localhost:3007/data/matchesOdds.json', {
+    const response = await axios.get('http://localhost:3008/data/matchesOdds.json', {
       
     });
     return response.data;

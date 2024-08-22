@@ -1,13 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,900;1,14..32,900&display=swap');
+
 body {
-  
-  font-family: "Roboto", sans-serif;
+
+  /* font-family: "Roboto", sans-serif; */
+  font-family: "Archivo Black", sans-serif;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.fontArchivoBold {
+  font-family: "Inter", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.fontArchivo {
+  font-family: "Inter", sans-serif;
+  font-weight: 200;
+  font-style: normal;
 }
 
 code {
@@ -24,60 +40,66 @@ code {
 .logoYizBet {
   height: 70px;
 }
+
 .carouselBg {
   background-color: rgba(0, 0, 0, 0.615);
   color: white;
   margin-top: 120px !important;
 }
-.LogoCompet{
+
+.LogoCompet {
   height: 50px;
   border-radius: 50%;
 }
-.flagMenu{
+
+.flagMenu {
   height: 20px;
   margin: 10px;
   border-radius: 100%;
 }
 
-.btn_betOdds{
+.btn_betOdds {
   color: white;
   font-weight: bold;
   background-color: black;
   transition: 0.3s;
 }
+
 .btn_betOdds:hover {
   transition: 0.3s;
   background-color: rgb(0, 0, 0) !important;
-  color:yellow;
+  color: yellow;
   border: 1px solid yellow;
 }
 
-.crestTeam{
+.crestTeam {
   height: 20px;
   width: 20px;
 }
-.jeuxDanger{
+
+.jeuxDanger {
   width: 100%;
 }
 
-.standingCard{
+.standingCard {
   background-color: blue;
   color: white;
   border-radius: 4%;
   font-weight: bold;
-  
+
 }
 
 .textScored {
   margin-top: 20%;
   color: #005099;
 }
-.sectionCopyright{
-  height: 200px;
+
+.sectionCopyright {
+  height: 320px;
   color: white;
   font-weight: bold;
   font-size: 10px;
-  
+
 }
 
 .gamesDay {
@@ -87,8 +109,9 @@ code {
   background-color: rgb(37, 36, 36);
   transform: skew(-10deg);
 }
+
 .section1 {
-  background-color: black;  
+  background-color: black;
   justify-content: center;
   padding: 26px;
 }
@@ -101,64 +124,73 @@ code {
   transition: 0.6s;
   padding: 7px;
 }
-.btnOdsSkew:hover{
+
+.btnOdsSkew:hover {
   transition: 0.6s;
   background-color: gray;
 }
-.dateGame , .venueGame{
-  font-weight:900;
+
+.dateGame,
+.venueGame {
+  font-weight: 900;
 }
 
 /* PLACEHOLDER SKALTON  */
 
 
-.btnWatchAllGame{
-  background-color:#252424 !important;
+.btnWatchAllGame {
+  background-color: #252424 !important;
   border-color: gold;
 }
-.btnWatchAllGame:hover{
+
+.btnWatchAllGame:hover {
   transition: 0.4s;
-  background-color:#363333 !important;
-  
+  background-color: #363333 !important;
+
 }
 
-.logoEntrance{
+.logoEntrance {
   animation: logoEntrance 2.5s ease 0s 1 normal forwards;
 }
-.welcomeEntrance{
+
+.welcomeEntrance {
   animation: logoEntrance 2s ease 0s 1 normal forwards;
 }
-.welcome{
+
+.welcome {
   height: 100px;
   width: 500px;
 }
-@keyframes logoEntrance {
-	0% {
-		opacity: 0;
-		transform: translateY(-250px);
-	}
 
-	100% {
-		opacity: 1;
-		transform: translateY(0);
-	}
+@keyframes logoEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-250px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .haveAccount {
   animation: haveAccount 2s ease 0s 1 normal forwards;
 }
-@keyframes haveAccount {
-	0% {
-		opacity: 0;
-		transform: translateY(250px);
-	}
 
-	100% {
-		opacity: 1;
-		transform: translateY(0);
-	}
+@keyframes haveAccount {
+  0% {
+    opacity: 0;
+    transform: translateY(250px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.sizeImg{
+
+.sizeImg {
   height: 150px;
 }
 
@@ -166,13 +198,122 @@ code {
   height: 30px;
 }
 
-.noChildren{
+.noChildren {
   color: white;
-  margin-left:30%;
+  margin-left: 30%;
   margin-right: 30%;
-   margin-top: 5%
+  margin-top: 5%
 }
-.buttonLogin{
+
+.buttonLogin {
   margin-left: 42%;
 }
 
+.loading {
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+.logoLoading {
+  height: 70px;
+}
+
+
+/* DIV CACHEE POUR PRONO DES MATCHS  */
+.additional-info {
+  background-color: #444444d8;
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: max-height 0.5s ease-in-out;
+  animation: animProno 2s ease 0s 1 normal forwards;
+  transition: 1s;
+}
+
+@keyframes animProno {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* CUSTOMISATION DU TOAST */
+/* CUSTOMISATION DU TOAST */
+/* CUSTOMISATION DU TOAST */
+
+.custom-toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+}
+
+.custom-toast {
+  background-color: #2f3031;
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  border-radius: 8px;
+  animation: Toast 2s ease 0s 1 normal forwards;
+}
+
+.custom-toast .toast-header {
+  background-color: #495057;
+  color: #ffed00; 
+}
+
+.custom-toast .toast-header .me-auto {
+  font-weight: bold; 
+}
+
+.custom-toast .toast-body {
+  font-size: 18px; 
+}
+@keyframes Toast {
+	0% {
+		opacity: 0;
+		transform: translateX(50px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+.outAnimation {
+  animation: ToastOut 2s ease 0s 1 normal forwards;
+
+}
+@keyframes ToastOut {
+	0% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	100% {
+		opacity: 0;
+		transform: translateX(50px);
+	}
+}
+/* CUSTOMISATION DU TOAST */
+/* CUSTOMISATION DU TOAST */
+/* CUSTOMISATION DU TOAST */

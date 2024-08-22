@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -8,13 +8,46 @@ import Section from "../Components/Section";
 import Footer from "../Components/Footer";
 import SectionPub from "../Components/SectionPub";
 import MyFunBet from "../Components/MyFunBet";
-
+import PaymentDisplay from "../Components/PaymentDisplay";
+import PaymentRefused from "../Components/PaymentRefused";
+import { useLocation } from "react-router-dom";
 
 const Home = () => {
- 
+  const location = useLocation();
+  const [showPaymentDisplay, setShowPaymentDisplay] = useState(false);
+  const [showPaymentRefused, setShowPaymentRefused] = useState(false);
+
+  useEffect(() => {
+   
+    if (location.search.includes("success=true")) {
+      setShowPaymentDisplay(true);
+    } else if (location.search.includes("canceled=true")) {
+      setShowPaymentRefused(true);
+    }
+  }, [location]);
+
+  useEffect(() => {
+    if (showPaymentDisplay) {
+      const timeout = setTimeout(() => {
+        setShowPaymentDisplay(false);
+      }, 2500);
+      return () => clearTimeout(timeout);
+    }
+  }, [showPaymentDisplay]);
+
+  useEffect(() => {
+    if (showPaymentRefused) {
+      const timeout = setTimeout(() => {
+        setShowPaymentRefused(false);
+      }, 2500);
+      return () => clearTimeout(timeout);
+    }
+  }, [showPaymentRefused]);
 
   return (
     <>
+      {showPaymentDisplay && <PaymentDisplay />}
+      {showPaymentRefused && <PaymentRefused />}
       <Navbar />
       <Row>
         <Col md={6}>

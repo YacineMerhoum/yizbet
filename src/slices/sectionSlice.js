@@ -2,7 +2,7 @@ import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchMatchDay = createAsyncThunk('matchDay/fetchMatchDay', async () => {
-    const response = await axios.get("http://localhost:3007/data/matches.json");
+    const response = await axios.get("http://localhost:3008/data/matches.json");
     return response.data;
 });
 

@@ -83,7 +83,7 @@ const Register = () => {
   };
 
   return (
-    <div className='container-fluid register-container' style={{ backgroundColor: "black", height: "100vh" }}>
+    <div className='container-fluid register-container' style={{ backgroundColor: "000814", height: "100vh" }}>
       <div className='row h-100'>
         <div className='col-lg-6 d-flex flex-column align-items-center justify-content-center text-white'>
           <Link to="/" className='logoEntrance mb-3'>
@@ -148,7 +148,7 @@ const Register = () => {
             </Form.Group>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <div className='d-flex justify-content-center'>
-              <Button variant='warning' type='submit' className='mt-2 text-center' disabled={loading}>
+              <Button  type='submit' className='mt-2 text-center fontStrong bgButtonLogin btnLogin' disabled={loading}>
                 {loading ? <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" /> : "S'inscrire"}
               </Button>
             </div>

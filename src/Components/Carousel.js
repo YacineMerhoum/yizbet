@@ -79,27 +79,30 @@ function DarkVariantExample() {
         />
         <Carousel.Caption>
           <div className="carouselBg">
-            <img className="flagMenu" src={matchDetails.data.matches[gameOne].homeTeam.crest} alt="Home Team Crest" />
-            <img className="flagMenu" src={matchDetails.data.matches[gameOne].awayTeam.crest} alt="Away Team Crest" />
+          <img className="LogoCompet" src={LogoCompet} alt="Competition Logo" />
+            
+            
 
             <h2 className="fontArchivoBold">
+            <img className="flagMenu" src={matchDetails.data.matches[gameOne].homeTeam.crest} alt="Home Team Crest" />
               {traduction[matchDetails.data.matches[gameOne].homeTeam.name]}
               <span className="me-2"> vs </span>
               {traduction[matchDetails.data.matches[gameOne].awayTeam.name]}
+            <img className="flagMenu" src={matchDetails.data.matches[gameOne].awayTeam.crest} alt="Away Team Crest" />
             </h2>
-            <img className="LogoCompet" src={LogoCompet} alt="Competition Logo" />
+            
             <p className="venueGame">{matchDetails.data.matches[gameOne].venue}</p>
             <p>
               <em className="dateGame">{isToday ? 'Ce soir' : formattedDate}</em>
               <img className="ms-2" style={{ height: "35px" }} src={channel2} alt="Channel Logo" />
             </p>
-            <Button variant="light" className="m-1 btn_betOdds">
+            <Button  className="m-1 fontStrong bgButtonLogin oddsMenuSize">
             {homeTeamOdd1}
             </Button>
-            <Button variant="light" className="m-1 btn_betOdds">
+            <Button className="m-1 fontStrong bgButtonLogin oddsMenuSize">
             {DrawGamemOdd1}
             </Button>
-            <Button variant="light" className="m-1 btn_betOdds">
+            <Button className="m-1 fontStrong bgButtonLogin oddsMenuSize">
             {awayTeamOdd1}
             </Button>
           </div>

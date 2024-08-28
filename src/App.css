@@ -37,3 +37,16 @@
   }
 }
 
+.caroussel1 {
+  
+  background: var(--color-darker-blue);
+  background: linear-gradient(85deg, rgba(0, 53, 102, 0.54) 0%, rgba(0, 8, 20, 1) 100%);
+  padding: 20px;
+}
+
+.caroussel2 {
+  background: var(--color-near-black);
+  background: linear-gradient(85deg, rgba(0, 8, 20, 1) 0%, rgba(0, 53, 102, 0.54) 100%);
+  padding: 20px;
+}
+

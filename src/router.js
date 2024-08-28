@@ -10,6 +10,7 @@ import Tokens from "./Pages/Tokens";
 
 import TermsAndConditions from "./Pages/TermsAndConditions";
 import About from "./Pages/About";
+import MyBet from "./Pages/MyBet";
 
 
 const router = createBrowserRouter([
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
   {
     path: "/about-us",
     element: <About />
+  },
+  {
+    path: "/mybet",
+    element: <MyBet />
   }
 ]);
 

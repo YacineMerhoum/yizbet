@@ -23,7 +23,8 @@ function SuccessBet() {
           <small>Just now</small>
         </Toast.Header>
         <Toast.Body>
-          10 tokens ont été déduits. Votre pronostic est maintenant disponible, vous l'avez également reçu par mail.
+        10 tokens ont été déduits. Votre pronostic est maintenant disponible,
+        Consultez tous vos achats dans la rubrique MyBet.
         </Toast.Body>
       </Toast>
     </div>

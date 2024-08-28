@@ -94,13 +94,13 @@ function DarkVariantExample() {
               <em className="dateGame">{isToday ? 'Ce soir' : formattedDate}</em>
               <img className="ms-2" style={{ height: "35px" }} src={channel1} alt="Channel Logo" />
             </p>
-            <Button variant="light" className="m-1 btn_betOdds">
+            <Button  className="m-1 fontStrong bgButtonLogin oddsMenuSize">
             {homeTeamOdd1}
             </Button>
-            <Button variant="light" className="m-1 btn_betOdds">
+            <Button  className="m-1 fontStrong bgButtonLogin oddsMenuSize">
             {DrawGamemOdd1}
             </Button>
-            <Button variant="light" className="m-1 btn_betOdds">
+            <Button  className="m-1 fontStrong bgButtonLogin oddsMenuSize">
             {awayTeamOdd1}
             </Button>
           </div>
@@ -129,13 +129,13 @@ function DarkVariantExample() {
             <em className="dateGame">{isToday ? 'Ce soir' : formattedDates}</em>
               <img className="ms-2" style={{ height: "15px" }} src={channel2} alt="Channel Logo" />
             </p>
-            <Button variant="light" className="m-1 btn_betOdds">
+            <Button  className="m-1 fontStrong bgButtonLogin oddsMenuSize">
             {homeTeamOdd2}
             </Button>
-            <Button variant="light" className="m-1 btn_betOdds">
+            <Button  className="m-1 fontStrong bgButtonLogin oddsMenuSize">
             {DrawGamemOdd2}
             </Button>
-            <Button variant="light" className="m-1 btn_betOdds">
+            <Button  className="m-1 fontStrong bgButtonLogin oddsMenuSize">
             {awayTeamOdd2}
             </Button>
           </div>

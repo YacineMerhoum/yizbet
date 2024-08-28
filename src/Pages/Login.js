@@ -48,7 +48,7 @@ const Login = () => {
   };
 
   return (
-    <div className='d-flex flex-column align-items-center' style={{ backgroundColor: "black", height: "100vh", width: "100%" }}>
+    <div className='d-flex flex-column align-items-center' style={{ backgroundColor: "000814", height: "100vh", width: "100%" }}>
       <Link to="/" className='logoEntrance' style={{ height: "22%", marginTop: "50px" }}>
         <img src={LogoYizBet} className='logoResponsive' alt="Logo" />
       </Link>

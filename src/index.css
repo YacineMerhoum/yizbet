@@ -12,6 +12,22 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+ 
+  
+}
+:root {
+  --color-primary: #FFD60A;
+  --color-secondary: #FBEC5D;
+  --color-accent: #FFC300;
+  --color-dark-blue: #26428B;
+  --color-darker-blue: #003566;
+  --color-darkest-blue: #001D3D;
+  --color-near-black: #000814;
+}
+
+.bgNavbar{
+  background-color: var(--color-near-black) !important;
+  
 }
 
 .fontArchivoBold {
@@ -30,11 +46,45 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.bgButtonLogin {
+  background-color: var(--color-dark-blue);
+  border: 2px solid var(--color-secondary);
+  
+  
+  
+  transition: 0.3s;
+  
+
+}
+.bgButtonLogin:hover{
+  background-color: var(--color-darker-blue);
+  transition: 0.3s;
+
+}
+.oddsMenuSize{
+  font-size: 20px;
+}
 
 .fontStrong {
-  font-family: "Roboto", sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 700;
   font-style: italic;
+  transition: 0.5s;
+}
+.fontStrong:hover {
+  transition: 0.6s !important;
+  color: var(--color-secondary);
+}
+/* DROPDOWN Divider de la navbar  */
+
+.autres{
+  font-weight: bold; 
+  transition: 0.6s;
+}
+.autres:hover{
+  transition: 0.6s !important;
+  color: var(--color-primary);
+ 
 }
 
 .logoYizBet {
@@ -42,7 +92,7 @@ code {
 }
 
 .carouselBg {
-  background-color: rgba(0, 0, 0, 0.615);
+  background-color: #000814c6;
   color: white;
   margin-top: 120px !important;
 }
@@ -53,8 +103,8 @@ code {
 }
 
 .flagMenu {
-  height: 20px;
-  margin: 10px;
+  height: 30px;
+  margin: 20px;
   border-radius: 100%;
 }
 
@@ -68,8 +118,8 @@ code {
 .btn_betOdds:hover {
   transition: 0.3s;
   background-color: rgb(0, 0, 0) !important;
-  color: yellow;
-  border: 1px solid yellow;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
 }
 
 .crestTeam {
@@ -103,22 +153,24 @@ code {
 }
 
 .gamesDay {
-  color: yellow;
+  color: var(--color-near-black);
   font-weight: 700;
-  font-size: 20px;
-  background-color: rgb(37, 36, 36);
+  font-size: 30px;
+  background-color: var(--color-secondary);
   transform: skew(-10deg);
 }
 
 .section1 {
-  background-color: black;
+  background-color: var(--color-near-black);
   justify-content: center;
   padding: 26px;
 }
 
+
+
 .btnOdsSkew {
-  background-color: black;
-  color: yellow;
+  background-color: var(--color-dark-blue);
+  color: var(--color-secondary);
   font-weight: bold;
   border: none;
   transition: 0.6s;
@@ -127,7 +179,8 @@ code {
 
 .btnOdsSkew:hover {
   transition: 0.6s;
-  background-color: gray;
+  background-color: var(--color-darkest-blue);
+  color: var(--color-primary);
 }
 
 .dateGame,
@@ -139,14 +192,14 @@ code {
 
 
 .btnWatchAllGame {
-  background-color: #252424 !important;
-  border-color: gold;
+  background-color: var(--color-near-black);
+  border-color: var(--color-accent);
 }
 
 .btnWatchAllGame:hover {
   transition: 0.4s;
-  background-color: #363333 !important;
-
+  background-color: var(--color-dark-blue);
+  border-color: var(--color-accent);
 }
 
 .logoEntrance {
@@ -210,7 +263,7 @@ code {
 }
 
 .loading {
-  background-color: black;
+  background-color: var(--color-near-black);
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -277,8 +330,8 @@ code {
 }
 
 .custom-toast .toast-header {
-  background-color: #495057;
-  color: #ffed00; 
+  background-color: var(--color-darker-blue);
+  color: var(--color-primary);
 }
 
 .custom-toast .toast-header .me-auto {

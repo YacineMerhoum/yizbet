@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import SectionPub from "../Components/SectionPub";
 import Footer from "../Components/Footer";
@@ -62,16 +62,18 @@ const Tokens = () => {
     user && (
       <>
         <Navbar />
-        <div className="section1">
+        <div className="section1" style={{ backgroundColor: "000814"}}>
           <div className="">
             <h3 className="text-center fontArchivoBold " style={{ color: "white", fontWeight: "bold" }}>
               <em>Nos tarifs </em>
               <span>🔥</span>
             </h3>
             <p className="text-white text-center mb-5 container mt-5" style={{ fontWeight: "bold", fontSize: "18px" }}>
-              Les règles sont simples : <br /> nous vous proposons un pronostic de votre choix contre 5 tokens, la monnaie virtuelle de notre application. Les tokens s'échangent contre de l'argent réel 💸 (10€ = 10 tokens). Vous pouvez utiliser nos pronostics pour parier sur des bookmakers tels que Unibet, Betclic, FDJ, etc...
+              Les règles sont simples : <br /> nous vous proposons un pronostic de votre choix contre 10 tokens, la monnaie virtuelle de notre application. Les tokens s'échangent contre de l'argent réel 💸 (10€ = 10 tokens). Vous pouvez utiliser nos pronostics pour parier sur des bookmakers tels que Unibet, Betclic, FDJ, etc...
               <br />
-              Cependant, nous vous conseillons de surveiller vos mises et rappelons que nous ne sommes pas responsables des résultats à venir, car nous ne pouvons pas prédire l'avenir. Veuillez lire attentivement nos <span className="text-warning">conditions d'utilisation</span> avant de vous lancer dans le jeu.
+              Cependant, nous vous conseillons de
+               surveiller vos mises et rappelons que nous ne sommes pas responsables des résultats à venir, car nous ne pouvons pas prédire l'avenir. 
+               Veuillez lire attentivement nos <Link to="/conditions"><span className="text-warning" style={{ textDecoration: "none" }}>conditions d'utilisation</span></Link> avant de vous lancer dans le jeu.
             </p>
           </div>
           <div className="">

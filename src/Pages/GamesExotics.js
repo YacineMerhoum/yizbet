@@ -45,18 +45,19 @@ const GamesExotics = () => {
     const fetchMatches = async () => {
       try {
         const response = await axios.get('http://localhost:3008/api/match-odds');
-        console.log('Données récupérées:', response.data);
+        console.log('Données brutes récupérées depuis l\'API:', response.data)
         setMatchData(response.data);
       } catch (err) {
         console.error('Erreur lors de la récupération des pronos:', err);
         setError(err);
       }
     };
-
+  
     fetchMatches();
     dispatch(oddsMatchs());
     window.scrollTo(0, 0);
   }, [dispatch]);
+  
 
   useEffect(() => {
     if (user) {
@@ -70,38 +71,101 @@ const GamesExotics = () => {
     }
   }, [matchData]);
 
+
+
   const handleConfirmPurchase = async (confirmed) => {
-    if (confirmed) {  // Si l'utilisateur a confirmé l'achat
-      const deductionResult = await dispatch(deductTokens({ userId: user.uid, amount: 1000 }));
-  
-      if (deductionResult.meta.requestStatus === 'fulfilled') {
-        setShowTokensOk(false); // Cache le toast PaymentBet après confirmation
-        setShowSuccessBet(true);  // Affiche le toast de réussite
-        setTimeout(() => setShowSuccessBet(false), 6000);
-        setSelectedMatch(tempMatchIndex);  // Affiche le pronostic du match après la déduction des tokens
-      }
+    if (confirmed) {
+        console.log("Début de la transaction pour l'achat de prédiction");
+
+        const deductionResult = await dispatch(deductTokens({ userId: user.uid, amount: 1000 }));
+
+        if (deductionResult.meta.requestStatus === 'fulfilled') {
+            console.log("Déduction de tokens réussie, affichage du toast et enregistrement du pari");
+
+            setShowTokensOk(false);
+            setShowSuccessBet(true);
+            setTimeout(() => setShowSuccessBet(false), 6000);
+            setSelectedMatch(tempMatchIndex);
+
+            try {
+                console.log('Temp Match Index:', tempMatchIndex);
+                console.log('Match Data at Temp Match Index:', matchData[tempMatchIndex]);
+
+                const prediction = matchData[tempMatchIndex]?.prediction;
+                const matchId = matchData[tempMatchIndex]?.id;
+
+                console.log('Prediction:', prediction);
+                console.log('Match ID:', matchId);
+
+                if (!matchId || !prediction) {
+                    console.error("Erreur : match_id ou prediction est null ou undefined");
+                    return;
+                }
+
+                const userIdResponse = await axios.get(`http://localhost:3008/user/${user.uid}`);
+                const userDbId = userIdResponse.data.id;
+
+                if (matchData[tempMatchIndex].id === matchId && matchData[tempMatchIndex].prediction === prediction) {
+                    await axios.post('http://localhost:3008/api/userpredictions', {
+                        user_id: userDbId,
+                        match_id: matchId,
+                        prediction: prediction,
+                        tokens_used: 1000
+                    });
+
+                    console.log('Pronostic enregistré avec succès pour le match:', matchId);
+                } else {
+                    console.error("Mismatch detected: Selected match does not correspond to fetched data");
+                }
+
+            } catch (error) {
+                console.error("Erreur lors de l'insertion du pronostic :", error);
+            }
+        } else {
+            console.error("Erreur lors de la déduction des tokens :", deductionResult);
+        }
     }
-  };
-  
-  const toggleMatchDetails = (matchIndex) => {
+};
+
+const toggleMatchDetails = (matchIndex) => {
+    console.log('Match sélectionné avec index:', matchIndex);
+
     if (!user) {
-      setShowLoginToast(true);
-      setTimeout(() => setShowLoginToast(false), 6000);
-      return;
+        setShowLoginToast(true);
+        setTimeout(() => setShowLoginToast(false), 6000);
+        return;
     }
-  
+
     if (totalBalance < 10) {
-      setShowNoToken(true);
-      setTimeout(() => setShowNoToken(false), 6000);
-      return;
+        setShowNoToken(true);
+        setTimeout(() => setShowNoToken(false), 6000);
+        return;
     }
-  
-    if (totalBalance >= 10) {
-      setSelectedMatch(null); // Réinitialise le match sélectionné pour masquer tout pronostic précédemment affiché
-      setShowTokensOk(true); // Affiche le toast de confirmation d'achat
-      setTempMatchIndex(matchIndex); // Stocke temporairement le match sélectionné pour une utilisation après confirmation
+
+
+    // Vérifiez si `matchIndex` correspond bien à une entrée dans `matchData`
+    if (matchData[matchIndex]) {
+        console.log('Match Data for selected index:', matchData[matchIndex]);
+
+        // Si la balance est suffisante, continuez
+        if (totalBalance >= 10) {
+            console.log('Total balance suffisant pour l\'achat');
+            setSelectedMatch(null); 
+            setShowTokensOk(true); 
+            setTempMatchIndex(matchIndex); 
+            console.log('Temp Match Index après sélection:', matchIndex);
+        } else {
+            console.error('Balance insuffisante');
+        }
+    } else {
+        console.error('Index hors des limites pour matchData:', matchIndex);
     }
-  };
+};
+
+
+
+
+
 
   if (!listGameDay) {
     return (
@@ -124,8 +188,8 @@ const GamesExotics = () => {
       {showSuccessBet && <SuccessBet />} 
       <div className=''>
         <div className="text-section1"></div>
-        <div className="text-center section1">
-          <h1 className="text-white text-center mb-4 text-warning fontArchivoBold mb-5">
+        <div className="text-center ">
+          <h1 className="text-white text-center mb-4 text-warning fontArchivoBold mb-5 mt-5">
             <em>Les MATCHS éxotiques du jour </em><span>🤑</span>
           </h1>
           <img className="container mb-5" src={imgExoGame} ref={matchOneRef}
@@ -136,7 +200,7 @@ const GamesExotics = () => {
           <p className="text-white text-center mb-5 container" style={{ fontWeight: "bold", fontSize: "18px" }}>
             Les matchs exotiques sont les plus lointains du monde, offrant des cotes parmi les plus folles ; de l'Islande à la Colombie en passant par le championnat coréen (du Sud, bien sûr 😅), profitez d'un large choix de sélections pour satisfaire toutes vos envies de paris sportifs.
           </p>
-          <div className="row justify-content-center">
+          <div className="row justify-content-center bgodds">
             <div
               className="col-12 col-md-6 mt-4"
               ref={matchOneRef}
@@ -152,7 +216,7 @@ const GamesExotics = () => {
               </p>
               {selectedMatch === 0 && (
                 <div className="additional-info">
-                  <p>Pronostic : {matchData[3] && matchData[3].prediction}</p>
+                  <p>Pronostic : {matchData[1].prediction  }</p>
                 </div>
               )}
             </div>
@@ -172,7 +236,7 @@ const GamesExotics = () => {
               </p>
               {selectedMatch === 1 && (
                 <div className="additional-info">
-                  <p>Pronostic : {matchData[7] && matchData[7].prediction}</p>
+                  <p>Pronostic : {matchData[5].prediction}</p>
                 </div>
               )}
             </div>
@@ -212,7 +276,7 @@ const GamesExotics = () => {
               </p>
               {selectedMatch === 3 && (
                 <div className="additional-info">
-                  <p>Pronostic : {listGameDay.data[3].prediction}</p>
+                  <p>Pronostic : {matchData[3] && matchData[3].prediction}</p>
                 </div>
               )}
             </div>
@@ -232,10 +296,11 @@ const GamesExotics = () => {
               </p>
               {selectedMatch === 4 && (
                 <div className="additional-info">
-                  <p>Pronostic : {listGameDay.data[4].prediction}</p>
+                  <p>Pronostic : {matchData[0] && matchData[0].prediction}</p>
                 </div>
               )}
             </div>
+
 
             <div
               className="col-12 col-md-6 mt-4"
@@ -252,7 +317,7 @@ const GamesExotics = () => {
               </p>
               {selectedMatch === 5 && (
                 <div className="additional-info">
-                  <p>Pronostic : {matchData[0] && matchData[0].prediction}</p>
+                  <p>Pronostic : {matchData[3] && matchData[3].prediction}</p>
                 </div>
               )}
             </div>

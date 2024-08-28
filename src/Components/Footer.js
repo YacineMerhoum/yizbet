@@ -9,10 +9,10 @@ const Footer = () => {
 
   return (
     <>
+      <a target='_blank'  href='https://joueurs-info-service.fr/'><img className='jeuxDanger' src={jeuxDanger}/></a>
+        
     
-        <img className='jeuxDanger' src={jeuxDanger}/>
-    
-    <div className='text-center sectionCopyright' style={{ backgroundColor: "#212529"}}>
+    <div className='text-center sectionCopyright' style={{ backgroundColor: "000814"}}>
       <img ref={logoVisible} src={LogoYizbet} className='mt-2'
        style={ {height: "100px" , transition: 'opacity 4.5s', opacity: setLogoVisible ? 1 : 0 }} />
       <p className=''>Copyright 2024 Yizbet.

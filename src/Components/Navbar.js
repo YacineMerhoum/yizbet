@@ -40,31 +40,31 @@ function BasicExample() {
   };
 
   return (
-    <Navbar bg="dark" data-bs-theme="dark">
+    <Navbar className='bgNavbar'  data-bs-theme="dark">
       <Container>
         <Navbar.Brand as={Link} to="/"><img src={LogoYizBet} className='logoYizBet' alt="Logo YizBet" /></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto navbarMobile">
+        <Navbar.Collapse id="basic-navbar-nav text-light">
+          <Nav className="me-auto navbarMobile" >
             <Nav.Link as={Link} to="/" className='fontStrong'>Home</Nav.Link>
-            <Nav.Link as={Link} to="/euro24" className='fontStrong ms-2 me-2'>Euro 2024</Nav.Link>
             <Nav.Link as={Link} to="/games-exotics" className='fontStrong ms-2 me-2'>Matchs Exotiques</Nav.Link>
+            <Nav.Link as={Link} to="/mybet" className='fontStrong ms-2 me-2'>MyBet</Nav.Link>
             <Nav.Link as={Link} to="/tokens" className='fontStrong ms-2 me-2'>Tokens
               <span ><img style={{ height: "15px", marginLeft: "5px" }} src={Coins} alt="Coins" /></span>
             </Nav.Link>
             <NavDropdown title="Autres" className='fontStrong ms-2 me-2' id="basic-nav-dropdown">
-              <NavDropdown.Item as={Link} to="/about-us">A propos de nous</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/conditions">Conditions générales</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/contact">Contactez-nous</NavDropdown.Item>
+             
+              <NavDropdown.Item as={Link} className='autres' to="/conditions">Conditions générales</NavDropdown.Item>
+              
               <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/separated-link">Separated link</NavDropdown.Item>
+              <NavDropdown.Item as={Link} className='autres' to="/about-us">A propos de nous</NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <div className="d-flex align-items-center loginResp">
             {!user ? (
               <>
-                <Button variant="outline-light" className="me-2 fontStrong btnLogin" as={Link} to="/register">S'inscrire</Button>
-                <Button variant="outline-light" className='fontStrong btnLogin btn2' as={Link} to="/login">Se connecter</Button>
+                <Button variant="outline-light" className="me-2 fontStrong bgButtonLogin btnLogin" as={Link} to="/register">S'inscrire</Button>
+                <Button variant="outline-light" className='fontStrong bgButtonLogin btnLogin btn2' as={Link} to="/login">Se connecter</Button>
               </>
             ) : (
               <>
@@ -77,7 +77,7 @@ function BasicExample() {
                   
                   
                   </span>
-                <Button variant="outline-light" className='fontStrong btnLogin' onClick={handleLogout}>Déconnexion</Button>
+                <Button variant="outline-light" className='fontStrong bgButtonLogin btnLogin' onClick={handleLogout}>Déconnexion</Button>
               </>
             )}
           </div>

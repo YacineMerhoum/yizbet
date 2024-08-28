@@ -1,15 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import Navbar from "../Components/Navbar";
 import YbPub from "../images/Autres/YIZBET.png";
 import image from "../images/Autres/imgpub1.png";
 import Footer from "../Components/Footer";
 import useIntersectionObserver from "../hooks/useIntersectionObserver";
+import imgBan from "../images/ImagesYizbet/banierematch2.png";
 
 const About = () => {
-  const [imageVisible , setImageVisible] =  useIntersectionObserver({ threshold: 0.5})
+
+  const [bannerRef, bannerVisible] = useIntersectionObserver({ threshold: 0.5 });
+  const [imageRef1, imageVisible1] = useIntersectionObserver({ threshold: 0.5 });
+  const [imageRef2, imageVisible2] = useIntersectionObserver({ threshold: 0.5 });
+
   return (
     <>
       <Navbar />
+      <img 
+        ref={bannerRef} 
+        src={imgBan} 
+        style={{ width: "100%", transition: 'opacity 1.5s', opacity: bannerVisible ? 1 : 0 }}
+      />
       <div className="section1">
         <div className="">
           <h1
@@ -114,17 +124,17 @@ const About = () => {
           <div className="d-flex justify-content-center m-5">
             <img
               src={YbPub}
-              ref={imageVisible}
-              className="mt-3 m-5 "
+              ref={imageRef1}
+              className="mt-3 m-5"
               title="Rejoignez-nous"
-              style={{ height: "500px", borderRadius: "10%" ,  transition: 'opacity 1.5s', opacity: setImageVisible ? 1 : 0 }}
+              style={{ height: "500px", borderRadius: "10%", transition: 'opacity 1.5s', opacity: imageVisible1 ? 1 : 0 }}
             />
             <img
               src={image}
-              ref={imageVisible}
-              className="mt-3 m-5 "
+              ref={imageRef2}
+              className="mt-3 m-5"
               title="Rejoignez-nous"
-              style={{ height: "500px", borderRadius: "10%" ,  transition: 'opacity 1.5s', opacity: setImageVisible ? 1 : 0 }}
+              style={{ height: "500px", borderRadius: "10%", transition: 'opacity 1.5s', opacity: imageVisible2 ? 1 : 0 }}
             />
           </div>
         </div>

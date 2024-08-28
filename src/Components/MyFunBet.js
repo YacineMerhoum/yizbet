@@ -39,7 +39,7 @@ const MyFunBet = () => {
     <>
       <div className="text-section1"></div>
       <div className="text-center section1">
-        <h3 className="text-white text-center mb-5 text-warning fontArchivoBold">
+        <h3 className="text-white text-center mb-5 text-warning fontArchivoBold" style={{ fontSize: "40px"}}>
           <em>Les MATCHS éxotiques du jour </em><span>🤑</span>
         </h3>
         <div className="row justify-content-between">

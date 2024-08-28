@@ -11,6 +11,7 @@ import MyFunBet from "../Components/MyFunBet";
 import PaymentDisplay from "../Components/PaymentDisplay";
 import PaymentRefused from "../Components/PaymentRefused";
 import { useLocation } from "react-router-dom";
+import '../App.css'
 
 const Home = () => {
   const location = useLocation();
@@ -51,12 +52,12 @@ const Home = () => {
       <Navbar />
       <Row>
         <Col md={6}>
-          <div style={{ backgroundColor: "lightgray", padding: "20px" }}>
+          <div className="caroussel1">
             <Carousel />
           </div>
         </Col>
         <Col md={6}>
-          <div style={{ backgroundColor: "lightblue", padding: "20px" }}>
+          <div className="caroussel2">
             <Carousel2 />
           </div>
         </Col>

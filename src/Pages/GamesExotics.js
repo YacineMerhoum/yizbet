@@ -16,6 +16,8 @@ import LoginIn from "../Toasts/LoginIn";
 import PaymentBet from "../Toasts/PaymentBet";
 import NoToken from "../Toasts/NoTokens";
 import SuccessBet from "../Toasts/SuccessBet";
+import { Link } from "react-router-dom";
+import Seo from "../Components/Seo";
 
 const GamesExotics = () => {
   const listGameDay = useSelector((state) => state.match.betGames);
@@ -181,6 +183,13 @@ const toggleMatchDetails = (matchIndex) => {
 
   return (
     <>
+    <Seo
+  title="Yizbet - Matchs Exotiques sur Yizbet"
+  description="Explorez les paris exotiques sur Yizbet. maximisez vos gains avec nos conseils."
+  keywords="Yizbet, paris exotiques, Games Exotics, paris sportifs, événements uniques"
+  url="https://www.yizbet.com/games-exotics"
+  image="https://www.yizbet.com/images/games-exotics-banner.jpg"
+/>
       <Navbar />
       {showLoginToast && <LoginIn />}
       {showTokensOk && <PaymentBet onConfirm={handleConfirmPurchase} />} 
@@ -192,14 +201,19 @@ const toggleMatchDetails = (matchIndex) => {
           <h1 className="text-white text-center mb-4 text-warning fontArchivoBold mb-5 mt-5">
             <em>Les MATCHS éxotiques du jour </em><span>🤑</span>
           </h1>
-          <img className="container mb-5" src={imgExoGame} ref={matchOneRef}
-            style={{ transition: 'opacity 1.5s', borderRadius: "44px", opacity: isMatchOneVisible ? 1 : 0 }} />
-          <p className="text-white text-center mb-5 container" style={{ fontWeight: "bold", fontSize: "18px" }}>
-            Les règles du jeu sont simples : voici une sélection de matchs du jour, sélectionnez le match qui vous intéresse et vous aurez le pronostic idéal adéquat ; attention, nos pronostics ne sont pas des valeurs sûres donc dosez vos mises de jeu, nous rappelons que les jeux d'argent sont dangereux.
-          </p>
-          <p className="text-white text-center mb-5 container" style={{ fontWeight: "bold", fontSize: "18px" }}>
-            Les matchs exotiques sont les plus lointains du monde, offrant des cotes parmi les plus folles ; de l'Islande à la Colombie en passant par le championnat coréen (du Sud, bien sûr 😅), profitez d'un large choix de sélections pour satisfaire toutes vos envies de paris sportifs.
-          </p>
+          <img className="container mb-5" src={imgExoGame} style={{ borderRadius: "44px" }} />
+          <p className="text-white text-center mb-5 container fontArchivo" style={{ fontWeight: "bold", fontSize: "18px" }}>
+  Les règles du jeu sont simples : voici une sélection de matchs du jour, sélectionnez le match qui vous intéresse et vous aurez le pronostic idéal adéquat. Attention, chaque pronostic coûte 10 tokens. Les tokens sont la monnaie du jeu et peuvent être échangés contre de l'argent réel<br /> (voir les règles
+   dans la rubrique <span className=""><Link to={"/Tokens"} style={{ textDecoration:"none" , color: "#FBEC5D"}}>Tokens</Link></span>). <br /><br />
+   Nous rappelons que les jeux d'argent sont dangereux, dosez donc vos mises de jeu.
+</p>
+<p className="text-white text-center mb-5 container fontArchivo" style={{ fontWeight: "bold", fontSize: "18px" }}>
+  Les matchs exotiques sont les plus lointains du monde, offrant des cotes parmi les plus folles ; de l'Islande à la Colombie en passant par le championnat coréen (du Sud, bien sûr 😅), profitez d'un large choix de sélections pour satisfaire toutes vos envies de paris sportifs.
+</p>
+<p className="text-white text-center mb-5 container fontArchivo" style={{ fontWeight: "bold", fontSize: "18px" }}>
+  Les pronostics sont publiés quotidiennement, ce qui signifie que vous aurez accès uniquement aux pronostics du jour. Pour les rencontres à venir, comme celles de demain ou plus tard, il faudra faire preuve de patience 😎.
+</p>
+
           <div className="row justify-content-center bgodds">
             <div
               className="col-12 col-md-6 mt-4"
@@ -207,16 +221,18 @@ const toggleMatchDetails = (matchIndex) => {
               style={{ transition: 'opacity 1.5s', opacity: isMatchOneVisible ? 1 : 0 }}
               onClick={() => toggleMatchDetails(0)}
             >
-              <p className="gamesDay text-center">{listGameDay.data[0].sport_title}</p>
-              <p className="gamesDay">
+              <p className="gamesDay text-center championnat">{listGameDay.data[0].sport_title}</p>
+              <p className="gamesDay hoverGame">
                 {listGameDay.data[0].home_team} vs {listGameDay.data[0].away_team}
+                <div>
                 <button className="ms-5 m-1 btnOdsSkew m-1 btnOdsSkew">{listGameDay.data[0].bookmakers[0].markets[0].outcomes[1].price}</button>
                 <button className="m-1 btnOdsSkew">{listGameDay.data[0].bookmakers[0].markets[0].outcomes[2].price}</button>
                 <button className="m-1 btnOdsSkew">{listGameDay.data[0].bookmakers[0].markets[0].outcomes[0].price}</button>
+              </div>
               </p>
               {selectedMatch === 0 && (
                 <div className="additional-info">
-                  <p>Pronostic : {matchData[1].prediction  }</p>
+                  <p>Pronostic : {matchData[0].prediction  }</p>
                 </div>
               )}
             </div>
@@ -227,16 +243,18 @@ const toggleMatchDetails = (matchIndex) => {
               style={{ transition: 'opacity 1.5s', opacity: isMatchTwoVisible ? 1 : 0 }}
               onClick={() => toggleMatchDetails(1)}
             >
-              <p className="gamesDay text-center">{listGameDay.data[1].sport_title}</p>
-              <p className="gamesDay">
+              <p className="gamesDay text-center championnat">{listGameDay.data[1].sport_title}</p>
+              <p className="gamesDay hoverGame">
                 {listGameDay.data[1].home_team} vs {listGameDay.data[1].away_team}
+                <div>
                 <button className="ms-5 m-1 btnOdsSkew m-1 btnOdsSkew">{listGameDay.data[1].bookmakers[0].markets[0].outcomes[1].price}</button>
                 <button className="m-1 btnOdsSkew">{listGameDay.data[1].bookmakers[0].markets[0].outcomes[2].price}</button>
                 <button className="m-1 btnOdsSkew">{listGameDay.data[1].bookmakers[0].markets[0].outcomes[0].price}</button>
+              </div>
               </p>
               {selectedMatch === 1 && (
                 <div className="additional-info">
-                  <p>Pronostic : {matchData[5].prediction}</p>
+                  <p>Pronostic : {matchData[1].prediction}</p>
                 </div>
               )}
             </div>
@@ -247,16 +265,18 @@ const toggleMatchDetails = (matchIndex) => {
               style={{ transition: 'opacity 1.5s', opacity: isMatchThreeVisible ? 1 : 0 }}
               onClick={() => toggleMatchDetails(2)}
             >
-              <p className="gamesDay text-center">{listGameDay.data[2].sport_title}</p>
-              <p className="gamesDay">
+              <p className="gamesDay text-center championnat">{listGameDay.data[2].sport_title}</p>
+              <p className="gamesDay hoverGame">
                 {listGameDay.data[2].home_team} vs {listGameDay.data[2].away_team}
+                <div>
                 <button className="ms-5 m-1 btnOdsSkew">{listGameDay.data[2].bookmakers[0].markets[0].outcomes[1].price}</button>
                 <button className="m-1 btnOdsSkew">{listGameDay.data[2].bookmakers[0].markets[0].outcomes[2].price}</button>
                 <button className="m-1 btnOdsSkew">{listGameDay.data[2].bookmakers[0].markets[0].outcomes[0].price}</button>
-              </p>
+             </div> 
+             </p>
               {selectedMatch === 2 && (
                 <div className="additional-info">
-                  <p>Pronostic : {matchData[6] && matchData[6].prediction}</p>
+                  <p>Pronostic : {matchData[2] && matchData[2].prediction}</p>
                 </div>
               )}
             </div>
@@ -267,12 +287,14 @@ const toggleMatchDetails = (matchIndex) => {
               style={{ transition: 'opacity 1.5s', opacity: isMatchFourVisible ? 1 : 0 }}
               onClick={() => toggleMatchDetails(3)}
             >
-              <p className="gamesDay text-center">{listGameDay.data[3].sport_title}</p>
-              <p className="gamesDay">
+              <p className="gamesDay text-center championnat">{listGameDay.data[3].sport_title}</p>
+              <p className="gamesDay hoverGame">
                 {listGameDay.data[3].home_team} vs {listGameDay.data[3].away_team}
+                <div>
                 <button className="ms-5 m-1 btnOdsSkew">{listGameDay.data[3].bookmakers[0].markets[0].outcomes[0].price}</button>
                 <button className="m-1 btnOdsSkew">{listGameDay.data[3].bookmakers[0].markets[0].outcomes[2].price}</button>
                 <button className="m-1 btnOdsSkew">{listGameDay.data[3].bookmakers[0].markets[0].outcomes[1].price}</button>
+             </div>
               </p>
               {selectedMatch === 3 && (
                 <div className="additional-info">
@@ -287,16 +309,18 @@ const toggleMatchDetails = (matchIndex) => {
               style={{ transition: 'opacity 1.5s', opacity: isMatchFiveVisible ? 1 : 0 }}
               onClick={() => toggleMatchDetails(4)}
             >
-              <p className="gamesDay text-center">{listGameDay.data[4].sport_title}</p>
-              <p className="gamesDay">
+              <p className="gamesDay text-center championnat">{listGameDay.data[4].sport_title}</p>
+              <p className="gamesDay hoverGame">
                 {listGameDay.data[4].home_team} vs {listGameDay.data[4].away_team}
+                <div>
                 <button className="ms-5 m-1 btnOdsSkew">{listGameDay.data[4].bookmakers[0].markets[0].outcomes[0].price}</button>
                 <button className="m-1 btnOdsSkew">{listGameDay.data[4].bookmakers[0].markets[0].outcomes[2].price}</button>
                 <button className="m-1 btnOdsSkew">{listGameDay.data[4].bookmakers[0].markets[0].outcomes[1].price}</button>
+              </div>
               </p>
               {selectedMatch === 4 && (
                 <div className="additional-info">
-                  <p>Pronostic : {matchData[0] && matchData[0].prediction}</p>
+                  <p>Pronostic : {matchData[4] && matchData[4].prediction}</p>
                 </div>
               )}
             </div>
@@ -308,16 +332,18 @@ const toggleMatchDetails = (matchIndex) => {
               style={{ transition: 'opacity 1.5s', opacity: isMatchSixVisible ? 1 : 0 }}
               onClick={() => toggleMatchDetails(5)}
             >
-              <p className="gamesDay text-center">{listGameDay.data[5].sport_title}</p>
-              <p className="gamesDay">
+              <p className="gamesDay championnat text-center">{listGameDay.data[5].sport_title}</p>
+              <p className="gamesDay hoverGame">
                 {listGameDay.data[5].home_team} vs {listGameDay.data[5].away_team}
+                <div>
                 <button className="ms-5 m-1 btnOdsSkew">{listGameDay.data[5].bookmakers[0].markets[0].outcomes[0].price}</button>
                 <button className="m-1 btnOdsSkew">{listGameDay.data[5].bookmakers[0].markets[0].outcomes[2].price}</button>
                 <button className="m-1 btnOdsSkew">{listGameDay.data[5].bookmakers[0].markets[0].outcomes[1].price}</button>
+              </div>
               </p>
               {selectedMatch === 5 && (
                 <div className="additional-info">
-                  <p>Pronostic : {matchData[3] && matchData[3].prediction}</p>
+                  <p>Pronostic : {matchData[5] && matchData[5].prediction}</p>
                 </div>
               )}
             </div>

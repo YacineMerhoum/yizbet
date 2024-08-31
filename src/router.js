@@ -11,6 +11,7 @@ import Tokens from "./Pages/Tokens";
 import TermsAndConditions from "./Pages/TermsAndConditions";
 import About from "./Pages/About";
 import MyBet from "./Pages/MyBet";
+import AdminDashboard from "./Components/AdminDashboard";
 
 
 const router = createBrowserRouter([
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
   {
     path: "/mybet",
     element: <MyBet />
+  },
+  {
+    path: "/admin",
+    element: <AdminDashboard />
   }
 ]);
 

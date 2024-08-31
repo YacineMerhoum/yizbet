@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { auth, signInWithGooglePopup } from '../firebase';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { Button, Form, Spinner } from 'react-bootstrap';
@@ -7,33 +7,48 @@ import LogoYizBet from '../images/premierlogo.png';
 import Welcome from '../images/Autres/welcome.png';
 import axios from 'axios';
 import googleLogo from "../images/Autres/Google.png";
+import prevention from "../images/Autres/prevention2.png";
 import "../GoogleButton.css";
 import "../responsive.css";
+import Seo from '../Components/Seo';
 
 const Register = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [pseudo, setPseudo] = useState('');
-  const [dob, setDob] = useState('');
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [pseudo, setPseudo] = useState('')
+  const [dob, setDob] = useState('')
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [showPrevention, setShowPrevention] = useState(true)
+  const [fadeOut, setFadeOut] = useState(false)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setFadeOut(true)
+      setTimeout(() => {
+        setShowPrevention(false)
+      }, 2000)
+    }, 2000)
+
+    return () => clearTimeout(timer)
+  }, [])
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    setLoading(true); // Commencez le chargement
+    setLoading(true);
 
-    const today = new Date();
-    const birthDate = new Date(dob);
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const month = today.getMonth() - birthDate.getMonth();
+    const today = new Date()
+    const birthDate = new Date(dob)
+    let age = today.getFullYear() - birthDate.getFullYear()
+    const month = today.getMonth() - birthDate.getMonth()
     if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
+      age--
     }
 
     if (age < 18) {
       setError('Vous devez être majeur pour vous inscrire.');
-      setLoading(false); // Arrêtez le chargement
+      setLoading(false);
       return;
     }
 
@@ -43,7 +58,7 @@ const Register = () => {
 
       await updateProfile(user, { displayName: pseudo });
 
-      const response = await axios.post('http://localhost:3008/register', {
+      await axios.post('http://localhost:3008/register', {
         email,
         password,
         pseudo,
@@ -55,17 +70,22 @@ const Register = () => {
         }
       });
 
-
       navigate('/');
     } catch (error) {
-      setError(error.message);
+      if (error.code === 'auth/email-already-in-use') {
+        setError('Cet e-mail est déjà utilisé. Veuillez en choisir un autre.');
+      } else {
+        setError(error.message);
+      }
     } finally {
-      setLoading(false); // Arrêtez le chargement
+      setLoading(false);
     }
   };
 
+  
+
   const logGoogleUser = async () => {
-    setLoading(true); // Commencez le chargement
+    setLoading(true);
     try {
       const response = await signInWithGooglePopup();
       await axios.post('http://localhost:3008/register', {
@@ -78,12 +98,27 @@ const Register = () => {
     } catch (error) {
       setError(error.message);
     } finally {
-      setLoading(false); // Arrêtez le chargement
+      setLoading(false);
     }
   };
 
   return (
+    <>
+    <Seo 
+  title="Yizbet - S'inscrire , Rejoignez Yizbet"
+  description="Créez un compte sur Yizbet et commencez à parier sur vos événements sportifs préférés. Rejoignez notre communauté de parieurs et profitez d'offres exclusives."
+  keywords="Yizbet, s'inscrire, créer un compte, paris sportifs, rejoindre Yizbet"
+  url="https://www.yizbet.com/register"
+  image="https://www.yizbet.com/images/register-banner.jpg"
+/>
+
     <div className='container-fluid register-container' style={{ backgroundColor: "000814", height: "100vh" }}>
+      
+      {showPrevention && (
+        <div className={`prevention-overlay ${fadeOut ? 'fade-out-blur' : ''}`}>
+          <img src={prevention} className='prevention' alt="Prevention" />
+        </div>
+      )}
       <div className='row h-100'>
         <div className='col-lg-6 d-flex flex-column align-items-center justify-content-center text-white'>
           <Link to="/" className='logoEntrance mb-3'>
@@ -148,7 +183,7 @@ const Register = () => {
             </Form.Group>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <div className='d-flex justify-content-center'>
-              <Button  type='submit' className='mt-2 text-center fontStrong bgButtonLogin btnLogin' disabled={loading}>
+              <Button type='submit' className='mt-2 text-center fontStrong bgButtonLogin btnLogin' disabled={loading}>
                 {loading ? <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" /> : "S'inscrire"}
               </Button>
             </div>
@@ -159,6 +194,7 @@ const Register = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

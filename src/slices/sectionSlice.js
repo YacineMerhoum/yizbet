@@ -1,8 +1,10 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+const API_URL = process.env.REACT_APP_API_URL
+
 export const fetchMatchDay = createAsyncThunk('matchDay/fetchMatchDay', async () => {
-    const response = await axios.get("http://localhost:3008/data/matches.json");
+    const response = await axios.get(`${API_URL}/data/matches.json`);
     return response.data;
 });
 

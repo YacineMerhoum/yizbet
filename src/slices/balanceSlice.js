@@ -1,12 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+
+const API_URL = process.env.REACT_APP_API_URL;
+
 // Action pour récupérer le total de la balance
 export const getTotalBalance = createAsyncThunk(
   'balance/getTotalBalance',
   async (userId, thunkAPI) => {
     try {
-      const response = await axios.get(`http://localhost:3008/total-balance/${userId}`, {
+      const response = await axios.get(`${API_URL}/total-balance/${userId}`, {
         timeout: 5000,
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -26,7 +29,7 @@ export const deductTokens = createAsyncThunk(
   'balance/deductTokens',
   async ({ userId, amount }, thunkAPI) => {
     try {
-      const response = await axios.post('http://localhost:3008/deduct-balance', {
+      const response = await axios.post(`${API_URL}/deduct-balance`, {
         userId,
         amount,
       }, {
@@ -72,7 +75,7 @@ const balanceSlice = createSlice({
       .addCase(deductTokens.fulfilled, (state, action) => {
         console.log('Montant déduit:', action.payload);
         state.status = 'succeeded';
-        state.totalBalance -= action.payload   // Met à jour la balance en déduisant les tokens (diviser par 100 pour convertir)
+        state.totalBalance -= action.payload; // Met à jour la balance en déduisant les tokens
       })
       .addCase(deductTokens.rejected, (state, action) => {
         state.status = 'failed';

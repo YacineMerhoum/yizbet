@@ -1,10 +1,19 @@
 import React from 'react'
 import  Navbar  from '../Components/Navbar'
 import Footer from '../Components/Footer'
+import Seo from '../Components/Seo'
 
 const TermsAndConditions = () => {
   return (
     <>
+    <Seo 
+  title="Yizbet - Conditions Générales d'Utilisation"
+  description="Lisez les conditions générales d'utilisation de Yizbet pour comprendre nos règles et garantir une expérience utilisateur optimale sur notre plateforme de pronostics sportifs."
+  keywords="Yizbet, CGU, conditions générales d'utilisation, règles, pronostics sportifs"
+  url="https://www.yizbet.com/conditions"
+  image="https://www.yizbet.com/images/cgu-banner.jpg"
+/>
+
     <Navbar />
     <div className="section1">
           <div className="">

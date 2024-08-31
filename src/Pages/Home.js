@@ -12,11 +12,23 @@ import PaymentDisplay from "../Components/PaymentDisplay";
 import PaymentRefused from "../Components/PaymentRefused";
 import { useLocation } from "react-router-dom";
 import '../App.css'
+import AccountDelete from "../Toasts/AccountDelete";
+import Seo from "../Components/Seo";
 
 const Home = () => {
   const location = useLocation();
-  const [showPaymentDisplay, setShowPaymentDisplay] = useState(false);
-  const [showPaymentRefused, setShowPaymentRefused] = useState(false);
+  const [showPaymentDisplay, setShowPaymentDisplay] = useState(false)
+  const [showPaymentRefused, setShowPaymentRefused] = useState(false)
+  const [showDeleteToast, setShowDeleteToast] = useState(false)
+
+  useEffect(() => {
+    if (location.state && location.state.showDeleteToast) {
+      setShowDeleteToast(true)
+      setTimeout(() => {
+        setShowDeleteToast(false)
+      }, 4000);
+    }
+  }, [location]);
 
   useEffect(() => {
    
@@ -47,8 +59,17 @@ const Home = () => {
 
   return (
     <>
+    
       {showPaymentDisplay && <PaymentDisplay />}
       {showPaymentRefused && <PaymentRefused />}
+      {showDeleteToast && <AccountDelete />}
+      <Seo 
+        title="Yizbet - Pronostics Sportifs Payants"
+        description="Bienvenue sur Yizbet, votre plateforme de pronostics sportifs payants. Rejoignez-nous pour maximiser vos gains avec nos analyses expertes."
+        keywords="Yizbet, pronostics sportifs, paris payants, paris sportifs, gains"
+        url="https://www.yizbet.com/"
+        image="https://www.yizbet.com/images/home-banner.jpg"
+      />
       <Navbar />
       <Row>
         <Col md={6}>

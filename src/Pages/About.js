@@ -5,6 +5,7 @@ import image from "../images/Autres/imgpub1.png";
 import Footer from "../Components/Footer";
 import useIntersectionObserver from "../hooks/useIntersectionObserver";
 import imgBan from "../images/ImagesYizbet/banierematch2.png";
+import Seo from "../Components/Seo";
 
 const About = () => {
 
@@ -14,6 +15,14 @@ const About = () => {
 
   return (
     <>
+    <Seo 
+  title="Yizbet - À Propos de Nous"
+  description="Découvrez l'histoire de Yizbet, notre mission, et comment nous aidons nos utilisateurs à maximiser leurs gains grâce à des pronostics sportifs de qualité."
+  keywords="Yizbet, à propos, mission, pronostics sportifs"
+  url="https://www.yizbet.com/about-us"
+  image="https://www.yizbet.com/images/about-us-banner.jpg"
+/>
+
       <Navbar />
       <img 
         ref={bannerRef} 

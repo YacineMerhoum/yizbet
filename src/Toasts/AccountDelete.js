@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Toast from 'react-bootstrap/Toast';
 import Logo from '../images/premierlogo.png';
-import '../index.css';
-import { Link } from 'react-router-dom';
+import '../index.css';  
 
-function SuccessBet() {
+function AccountDelete() {
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setFadeOut(true);
-    }, 7000);
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -28,15 +27,11 @@ function SuccessBet() {
           <small>Just now</small>
         </Toast.Header>
         <Toast.Body>
-        10 tokens ont été déduits. Votre pronostic est maintenant disponible,
-        Consultez tous vos achats dans la rubrique 
-        <Link to={"/mybet"} style={{ textDecoration: "none" }}>
-          <span style={{ color: "#FFD60A" }}> MyBet</span>
-        </Link>.
+         Votre compte est supprimé 
         </Toast.Body>
       </Toast>
     </div>
   );
 }
 
-export default SuccessBet;
+export default AccountDelete;

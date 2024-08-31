@@ -5,6 +5,7 @@ import { Button, Form } from 'react-bootstrap';
 import LogoYizBet from '../images/premierlogo.png';
 import { Link, useNavigate } from 'react-router-dom';
 import googleLogo from "../images/Autres/Google.png";
+import Seo from "../Components/Seo"
 import "../GoogleButton.css";
 
 const Login = () => {
@@ -48,6 +49,14 @@ const Login = () => {
   };
 
   return (
+    <>
+      <Seo 
+        title="Yizbet - Connexion"
+        description="Connectez-vous à Yizbet pour accéder à vos pronostics et parier sur vos événements sportifs préférés."
+        keywords="connexion, Yizbet, paris sportifs, login"
+        url="https://www.yizbet.com/login"
+        image="https://www.yizbet.com/images/login-banner.jpg"
+      />
     <div className='d-flex flex-column align-items-center' style={{ backgroundColor: "000814", height: "100vh", width: "100%" }}>
       <Link to="/" className='logoEntrance' style={{ height: "22%", marginTop: "50px" }}>
         <img src={LogoYizBet} className='logoResponsive' alt="Logo" />
@@ -96,6 +105,7 @@ const Login = () => {
         Vous n'avez pas de compte ? Inscrivez vous <Link style={{ textDecoration :"none" }} to={"/register"}>ici 🔥</Link>
       </h5>
     </div>
+    </>
   );
 };
 

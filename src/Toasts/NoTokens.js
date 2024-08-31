@@ -14,9 +14,13 @@ function NoTokens() {
     return () => clearTimeout(timer);
   }, []);
 
+  const handleClose = () => {
+    setFadeOut(true);
+  };
+
   return (
     <div className={`custom-toast-container ${fadeOut ? 'outAnimation' : ''}`}>
-      <Toast className="custom-toast">
+      <Toast className="custom-toast" onClose={handleClose} show={!fadeOut}>
         <Toast.Header>
           <img src={Logo} style={{ height: "30px", marginRight: "10px" }} alt="logo" />
           <strong className="me-auto">Notification</strong>

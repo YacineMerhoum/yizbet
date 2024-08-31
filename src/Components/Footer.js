@@ -3,6 +3,7 @@ import jeuxDanger from '../images/Autres/jeuxgouv.png'
 import LogoYizbet from "../images/premierlogo.png"
 import useIntersectionObserver from '../hooks/useIntersectionObserver'
 import logoStripe from '../images/Autres/stripe.png'
+import prevention from "../images/Autres/prévention1.png"
 
 const Footer = () => {
   const [logoVisible , setLogoVisible] = useIntersectionObserver({ threshold: 0.5 })
@@ -18,9 +19,10 @@ const Footer = () => {
       <p className=''>Copyright 2024 Yizbet.
       <br />Tous droits réservés. Yizbet est une marque déposée. 
       <br />Yizbet n’est pas affilié ou lié à des équipes sportives, organisateurs d’évènements ou à des joueurs s’affichant sur ses sites web.</p> 
-      <div className='partenaries mt-5'>
+      <div className='partenaries mt-2 mb-3'>
         <img src={logoStripe} alt='Stripe' style={{ height: "100px" , transition: 'opacity 2.5s', opacity: setLogoVisible ? 1 : 0 }} />
       </div>
+      <img src={prevention} style={{ height: "15%"}} />
    </div>
     </>
   )

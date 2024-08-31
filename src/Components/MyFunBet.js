@@ -51,9 +51,11 @@ const MyFunBet = () => {
             <p className="gamesDay text-center">{listGameDay.data[matchOne].sport_title}</p>
             <p className="gamesDay">
               {listGameDay.data[matchOne].home_team} vs {listGameDay.data[matchOne].away_team}
+              <div className="">
               <button className="ms-5 m-1 btnOdsSkew">{listGameDay.data[matchOne].bookmakers[0].markets[0].outcomes[1].price}</button>
               <button className="m-1 btnOdsSkew">{listGameDay.data[matchOne].bookmakers[0].markets[0].outcomes[2].price}</button>
               <button className="m-1 btnOdsSkew">{listGameDay.data[matchOne].bookmakers[0].markets[0].outcomes[0].price}</button>
+              </div>
            </p>
           </div>
           <div
@@ -64,9 +66,11 @@ const MyFunBet = () => {
             <p className="gamesDay text-center">{listGameDay.data[matchTwo].sport_title}</p>
             <p className="gamesDay">
               {listGameDay.data[matchTwo].home_team} vs {listGameDay.data[matchTwo].away_team}
+              <div>
               <button className="ms-5 m-1 btnOdsSkew">{listGameDay.data[matchTwo].bookmakers[0].markets[0].outcomes[1].price}</button>
               <button className="m-1 btnOdsSkew">{listGameDay.data[matchTwo].bookmakers[0].markets[0].outcomes[2].price}</button>
               <button className="m-1 btnOdsSkew">{listGameDay.data[matchTwo].bookmakers[0].markets[0].outcomes[0].price}</button>
+              </div>
             </p>
           </div>
         </div>

@@ -1,4 +1,53 @@
+:root {
+    --color-primary: #FFD60A;
+    --color-secondary: #FBEC5D;
+    --color-accent: #FFC300;
+    --color-dark-blue: #26428B;
+    --color-darker-blue: #003566;
+    --color-darkest-blue: #001D3D;
+    --color-near-black: #000814;
+  }
+
+
+/* Navbar mobile  */
+.navbarMobile .nav-link {
+    color: #fff;
+    transition: 0.6s;
+  }
+  .navbarMobile .nav-link:hover {
+    color:var(--color-secondary);
+    transition: 0.6s;
+  }
+  
+  .loginResp .btnLogin {
+    margin-right: 10px;
+  }
+  
+  @media (max-width: 992px) {
+
+    .loginResp {
+      flex-wrap: nowrap;
+      justify-content: center;
+    }
+  
+    .loginResp .btnLogin {
+      margin-bottom: 0;
+    }
+    .logoMobile{
+        height: 40px;
+        margin-top: 15%;
+        margin-bottom: 15%;
+    }
+  }
+/* Navbar mobile  */
+
 @media (max-width: 600px) {
+    .prevention, .prevention-overlay{
+      display: none;
+    }
+    .btnburger{
+      margin-left: 8px !important;
+    }
     .loginResp {
         display: flex;
         flex-direction: column;
@@ -6,15 +55,17 @@
     .btnLogin {
         height: 40px;
         margin: 5px;
-        font-size: 10px;
-        color: chartreuse;
+        font-size: 12px;
+        color:var(--color-secondary);
+        margin-right: 1%;
+        
     }
     .btn2{
         width: 67px;
     }
-    .navbarMobile{
+    /* .navbarMobile{
         margin-left: -30px;
-    }
+    } */
     .tableStanding {
         margin-left: 0%;
         font-size: 10px;
@@ -68,6 +119,10 @@
         width: 300px !important;
         margin-left: -58px !important;
      }
+     .prevention{
+      height: 10%;
+      width: 90%;
+     }
      
     }
 
@@ -89,3 +144,7 @@
     }
       
 
+    @media (max-width: 600px) {
+      
+      
+    }

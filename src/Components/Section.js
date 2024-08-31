@@ -51,7 +51,7 @@ const Section = () => {
           <em>Les gros MATCHS du jour </em>🔥
         </h3>
         <div className="row justify-content-between">
-          <div className="col-12 col-md-6">
+          <div className="col-12 col-md-6 ">
             {listGameDay.matches[0] ? (
               <>
                 {listGameDay.matches[1].hasStarted && (
@@ -62,9 +62,11 @@ const Section = () => {
                 )}
                 <p className="gamesDay">
                   {traductions[homeTeam]} vs {traductions[awayTeam]}
+                  <div className="">
                   <button className="ms-5 m-1 btnOdsSkew">2.50</button>
                   <button className="m-1 btnOdsSkew">2.50</button>
                   <button className="m-1 btnOdsSkew">2.50</button>
+                  </div>
                 </p>
               </>
             ) : (
@@ -86,9 +88,11 @@ const Section = () => {
                 )}
                 <p className="gamesDay">
                   {traductions[homeTeam2]} vs {traductions[awayTeam2]}
+                  <div className="">
                   <button className="ms-5 m-1 btnOdsSkew">2.50</button>
                   <button className="m-1 btnOdsSkew">2.50</button>
                   <button className="m-1 btnOdsSkew">2.50</button>
+                  </div>
                 </p>
               </>
             ) : (

@@ -17,16 +17,21 @@ body {
 }
 :root {
   --color-primary: #FFD60A;
-  --color-secondary: #FBEC5D;
+  --color-secondary:#FBEC5D ;
   --color-accent: #FFC300;
   --color-dark-blue: #26428B;
   --color-darker-blue: #003566;
   --color-darkest-blue: #001D3D;
   --color-near-black: #000814;
 }
+.font {
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+}
 
 .bgNavbar{
   background-color: var(--color-near-black) !important;
+  
   
 }
 .cardBet{
@@ -493,3 +498,11 @@ code {
 /* MESSAGES DERREUR  */
 /* MESSAGES DERREUR  */
 /* MESSAGES DERREUR  */
+
+.compte{
+  transition: 0.4s;
+}
+.compte:hover{
+  transition: 0.4s;
+  color: #FBEC5D;
+}

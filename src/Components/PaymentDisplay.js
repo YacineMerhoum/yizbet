@@ -26,7 +26,7 @@ const PaymentDisplay = () => {
 
   return (
     <div
-      className="payment-display-container"
+      className="payment-display-container fontArchivo"
       style={{ opacity: opacity }}
     >
       <div className="payment-display-content">

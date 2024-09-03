@@ -28,8 +28,8 @@ const Register = () => {
       setFadeOut(true)
       setTimeout(() => {
         setShowPrevention(false)
-      }, 2000)
-    }, 2000)
+      }, 1500)
+    }, 1500)
 
     return () => clearTimeout(timer)
   }, [])
@@ -70,7 +70,7 @@ const Register = () => {
         }
       });
 
-      navigate('/');
+      navigate('/', { state: { showToastWelcome: true } });
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         setError('Cet e-mail est déjà utilisé. Veuillez en choisir un autre.');
@@ -94,7 +94,9 @@ const Register = () => {
         uid: response.user.uid,
         google: true
       });
-      navigate("/");
+
+
+      navigate("/" , { state: { showToastWelcome: true }});
     } catch (error) {
       setError(error.message);
     } finally {
@@ -125,7 +127,7 @@ const Register = () => {
             <img className='sizeImg animated-logo' src={LogoYizBet} alt="Logo YizBet" />
           </Link>
           <img src={Welcome} className="sizeImg sizeImg2 welcomeEntrance mb-3 animated-logo" alt="Welcome" />
-          <h5 className='text-center noChildren mx-4'>
+          <h5 className='text-center noChildren mx-4 fontArchivoBold '>
             L'utilisation de Yizbet est strictement interdite aux mineurs en raison de 
             l'interdiction des jeux d'argent pour les personnes mineures.
           </h5>
@@ -138,7 +140,7 @@ const Register = () => {
         <div className='col-lg-6 d-flex flex-column align-items-center justify-content-center'>
           <Form className='w-75' onSubmit={handleRegister}>
             <Form.Group className='mb-4 text-center' controlId='formBasicPseudo'>
-              <Form.Label style={{ color: 'white', fontWeight: "bold" }}>Pseudo</Form.Label>
+              <Form.Label className='fontArchivoBold' style={{ color: 'white', fontWeight: "bold" , fontSize:"25px" , fontStyle:"italic" }}>Pseudo</Form.Label>
               <Form.Control
                 type='text'
                 placeholder='Entrez votre pseudo'
@@ -149,7 +151,7 @@ const Register = () => {
               />
             </Form.Group>
             <Form.Group className='mb-4 text-center' controlId='formBasicEmail'>
-              <Form.Label style={{ color: 'white', fontWeight: "bold" }}>Adresse e-mail</Form.Label>
+              <Form.Label className='fontArchivoBold' style={{ color: 'white', fontWeight: "bold" , fontSize:"25px" , fontStyle:"italic" }}>Adresse e-mail</Form.Label>
               <Form.Control
                 type='email'
                 placeholder='Entrez votre e-mail'
@@ -160,7 +162,7 @@ const Register = () => {
               />
             </Form.Group>
             <Form.Group className='mb-4 text-center' controlId='formBasicPassword'>
-              <Form.Label style={{ color: 'white', fontWeight: "bold" }}>Mot de passe</Form.Label>
+              <Form.Label className='fontArchivoBold' style={{ color: 'white', fontWeight: "bold" , fontSize:"25px" , fontStyle:"italic" }}>Mot de passe</Form.Label>
               <Form.Control
                 type='password'
                 placeholder='Entrez votre mot de passe'
@@ -171,7 +173,7 @@ const Register = () => {
               />
             </Form.Group>
             <Form.Group className='mb-4 text-center' controlId='formBasicDOB'>
-              <Form.Label style={{ color: 'white', fontWeight: "bold" }}>Date de naissance</Form.Label>
+              <Form.Label className='fontArchivoBold' style={{ color: 'white', fontWeight: "bold" , fontSize:"25px" , fontStyle:"italic" }}>Date de naissance</Form.Label>
               <Form.Control
                 type='date'
                 placeholder='Entrez votre date de naissance'

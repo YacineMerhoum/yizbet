@@ -2,9 +2,9 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = process.env.REACT_APP_API_URL
 
-// Action pour récupérer le total de la balance
+
 export const getTotalBalance = createAsyncThunk(
   'balance/getTotalBalance',
   async (userId, thunkAPI) => {
@@ -15,11 +15,11 @@ export const getTotalBalance = createAsyncThunk(
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       });
-      console.log('Réponse complète de l\'API:', response.data);
-      return response.data.totalBalance;
+      console.log('Réponse complète de l\'API:', response.data)
+      return response.data.totalBalance
     } catch (error) {
-      console.error('Erreur lors de l\'appel API:', error);
-      return thunkAPI.rejectWithValue(error.message);
+      console.error('Erreur lors de l\'appel API:', error)
+      return thunkAPI.rejectWithValue(error.message)
     }
   }
 );
@@ -58,28 +58,28 @@ const balanceSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getTotalBalance.pending, (state) => {
-        state.status = 'loading';
+        state.status = 'loading'
       })
       .addCase(getTotalBalance.fulfilled, (state, action) => {
         console.log('Payload de getTotalBalance:', action.payload);
-        state.status = 'succeeded';
-        state.totalBalance = action.payload;
+        state.status = 'succeeded'
+        state.totalBalance = action.payload
       })
       .addCase(getTotalBalance.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload;
+        state.error = action.payload
       })
       .addCase(deductTokens.pending, (state) => {
-        state.status = 'loading';
+        state.status = 'loading'
       })
       .addCase(deductTokens.fulfilled, (state, action) => {
         console.log('Montant déduit:', action.payload);
-        state.status = 'succeeded';
-        state.totalBalance -= action.payload; // Met à jour la balance en déduisant les tokens
+        state.status = 'succeeded'
+        state.totalBalance -= action.payload
       })
       .addCase(deductTokens.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload;
+        state.error = action.payload
       });
   }
 });

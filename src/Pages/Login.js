@@ -19,7 +19,7 @@ const Login = () => {
     setError(''); // Réinitialiser l'erreur
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/");
+      navigate("/" , { state :{showWelcomeBack: true}  });
     } catch (error) {
       if (error.code === 'auth/user-not-found') {
         setError("Utilisateur non trouvé. Veuillez vérifier votre email ou créer un nouveau compte.");
@@ -35,7 +35,7 @@ const Login = () => {
     try {
       const response = await signInWithGooglePopup();
       if (response.user) {
-        navigate("/");
+        navigate("/" , { state :{showWelcomeBack: true}  });
       } else {
         setError("Erreur lors de la connexion avec Google.");
       }
@@ -58,10 +58,10 @@ const Login = () => {
         image="https://www.yizbet.com/images/login-banner.jpg"
       />
     <div className='d-flex flex-column align-items-center' style={{ backgroundColor: "000814", height: "100vh", width: "100%" }}>
-      <Link to="/" className='logoEntrance' style={{ height: "22%", marginTop: "50px" }}>
+      <Link to="/" className='logoEntrance' style={{ height: "22%", marginTop: "0px" }}>
         <img src={LogoYizBet} className='logoResponsive' alt="Logo" />
       </Link>
-      <h5 className='text-center noChildren' style={{ color: "white", marginLeft:"30%", marginRight: "30%", marginTop:"5%" }}>
+      <h5 className='text-center noChildren fontArchivo' style={{ color: "white", marginLeft:"30%", marginRight: "30%", marginTop:"5%" }}>
         L'utilisation de Yizbet est strictement interdite aux mineurs en raison de
         l'interdiction des jeux d'argent pour les personnes mineures.
       </h5>
@@ -74,7 +74,7 @@ const Login = () => {
       </div>
       <Form className='w-50 mt-5' onSubmit={handleLogin}>
         <Form.Group style={{ width: "45%", textAlign: 'center'}} className='mb-3 mx-auto' controlId='formBasicEmail'>
-          <Form.Label style={{ color: 'white', fontWeight: "bold", textAlign: "center" }}>Adresse e-mail</Form.Label>
+          <Form.Label className='fontArchivo'  style={{ color: 'white', fontWeight: "bold" , fontSize:"25px" , fontStyle:"italic" }}>Adresse e-mail</Form.Label>
           <Form.Control
             type='email'
             className='inputs'
@@ -84,7 +84,7 @@ const Login = () => {
           />
         </Form.Group>
         <Form.Group style={{ width: "45%", textAlign: 'center'}} className='mb-3 mx-auto' controlId='formBasicPassword'>
-          <Form.Label style={{ color: 'white', fontWeight: "bold" }}>Mot de passe</Form.Label>
+          <Form.Label  className='fontArchivo'  style={{ color: 'white', fontWeight: "bold" , fontSize:"25px" , fontStyle:"italic" }}>Mot de passe</Form.Label>
           <Form.Control
             type='password'
             className='inputs'
@@ -100,7 +100,7 @@ const Login = () => {
           </Button>
         </div>
       </Form>
-      <h5 className='text-center' 
+      <h5 className='text-center fw-bold fst-italic ' 
         style={{ color: "white", marginLeft:"30%", marginRight: "30%", marginTop:"3%", fontSize: "25px" }}>
         Vous n'avez pas de compte ? Inscrivez vous <Link style={{ textDecoration :"none" }} to={"/register"}>ici 🔥</Link>
       </h5>

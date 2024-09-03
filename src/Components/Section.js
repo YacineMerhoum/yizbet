@@ -61,7 +61,7 @@ const Section = () => {
                   </p>
                 )}
                 <p className="gamesDay">
-                  {traductions[homeTeam]} vs {traductions[awayTeam]}
+                  {homeTeam} vs {traductions[awayTeam]}
                   <div className="">
                   <button className="ms-5 m-1 btnOdsSkew">2.50</button>
                   <button className="m-1 btnOdsSkew">2.50</button>

@@ -4,6 +4,7 @@ import footballReducer from '../slices/footballSlice';
 import matchReducer from '../slices/matchSlice';
 import matchDayReducer from '../slices/sectionSlice';
 import balanceReducer from '../slices/balanceSlice'
+import userReducer from '../slices/userSlice'
 
 
 export const store = configureStore({
@@ -12,6 +13,6 @@ export const store = configureStore({
     match: matchReducer,
     matchDay: matchDayReducer,
     balance: balanceReducer,
-    
+    user: userReducer
   },
 });

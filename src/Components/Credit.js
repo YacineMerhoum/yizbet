@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
-const Credit = ({ userId }) => {
-  const [currentCredit, setCurrentCredit] = useState(0)
+const Credit = ({ onLoaded }) => {
+  const [lastPaymentAmount, setLastPaymentAmount] = useState(0)
+  const user = useSelector(state => state.user.user)
 
   useEffect(() => {
-    const fetchCurrentCredit = async () => {
+    const fetchLastPayment = async () => {
       try {
-        const response = await axios.get(`http://localhost:3008/current-credit/${userId}`)
-        setCurrentCredit(response.data.currentCredit);
-        console.log(response , "oeoeoeoeo");
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/last-payment/${user.id}`)
+        setLastPaymentAmount(response.data.amount);
+        onLoaded()
+        console.log(response, "Dernier paiement récupéré")
       } catch (error) {
-        console.error('Erreur lors de la récupération du crédit actuel:', error)
-        
+        console.error('Erreur lors de la récupération du dernier paiement:', error)
       }
     };
 
-    fetchCurrentCredit();
-  }, [userId]);
+    if (user && user.id) {
+      fetchLastPayment()
+    }
+  }, [user, onLoaded])
 
-  return (
-    
-     <>{currentCredit}</> 
-    
-  );
+  return <>{lastPaymentAmount / 100}</>;
 };
+export default Credit
 
-export default Credit;

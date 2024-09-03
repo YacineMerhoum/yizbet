@@ -8,21 +8,24 @@ import { auth } from "../firebase";
 import { getAuth } from "firebase/auth";
 import logo from "../images/premierlogo.png"
 import Seo from "../Components/Seo";
+import { useSelector } from "react-redux";
 
 const Tokens = () => {
   const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
-
+  const userState = useSelector((state)=>state.user.user)
+  console.log('user', userState);
+  
   useEffect(() => {
     if (!loading && !user) {
       navigate("/login")
     }
   }, [user, loading, navigate]);
-
+  
   const handleCheckout = async (priceId) => {
     try {
       const auth = getAuth();
-    const user = auth.currentUser;
+      const user = auth.currentUser;
 
     if (!user) {
       console.error('User not authenticated');
@@ -38,7 +41,7 @@ const Tokens = () => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ priceId }),
+        body: JSON.stringify({ priceId , userId : userState}),
       });
 
       const data = await response.json();

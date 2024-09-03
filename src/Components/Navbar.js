@@ -36,6 +36,7 @@ function BasicExample() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      console.log(currentUser);
       if (currentUser) {
         dispatch(getUser(currentUser.uid));
       }
@@ -68,11 +69,11 @@ function BasicExample() {
         {/* Affichage du solde utilisateur entre le logo et le burger en version mobile */}
         {isMobile && user && (
           <div className="d-flex align-items-center me-auto ms-3">
-            <span className="text-white me-2 PseudoConnecte">
-              <em style={{ fontWeight: "bold", fontSize: "15px" }}>{user.displayName}</em>
+            <span className="text-white me-2 PseudoConnecte fontArchivo">
+              <em style={{ fontWeight: "bold", fontSize: "20px" }}>{user.displayName}</em>
             </span>
             <img src={Coin} className='coin' alt="Coin" />
-            <span className='text-white ms-1' style={{ fontWeight: "bold", fontSize: "15px", marginRight: "15px" }}>
+            <span className='text-white ms-1 fontArchivo' style={{ fontWeight: "bold", fontSize: "20px", marginRight: "15px" }}>
               <Balance userId={user.uid} />
             </span>
           </div>
@@ -101,11 +102,12 @@ function BasicExample() {
               <>
                 {!isMobile && (
                   <>
-                    <span className="text-white me-2 PseudoConnecte">
-                      <em style={{ fontWeight: "bold", fontSize: "15px" }}>{user.displayName}</em>
+                    <span className="text-white me-2 PseudoConnecte fontArchivo ">
+                     <Link  to={'/mybet'} alt="Mon compte Mybet" style={{ textDecoration:"none" , color:"white"}}>
+                     <em className='compte' style={{ fontWeight: "bold", fontSize: "20px"  }}>{user.displayName}</em></Link>
                     </span>
                     <img src={Coin} className='coin' alt="Coin" />
-                    <span className='text-white ms-1' style={{ fontWeight: "bold", fontSize: "15px", marginRight: "15px" }}>
+                    <span className='text-white ms-1 fontArchivo' style={{ fontWeight: "bold", fontSize: "20px", marginRight: "15px" }}>
                       <Balance userId={user.uid} />
                     </span>
                   </>

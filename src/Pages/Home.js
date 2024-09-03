@@ -14,6 +14,8 @@ import { useLocation } from "react-router-dom";
 import '../App.css'
 import AccountDelete from "../Toasts/AccountDelete";
 import Seo from "../Components/Seo";
+import Welcome from "../Toasts/Welcome"
+import WelcomeBackToast from "../Toasts/WelcomeBackToast";
 
 const Home = () => {
   const location = useLocation();
@@ -21,7 +23,29 @@ const Home = () => {
   const [showPaymentRefused, setShowPaymentRefused] = useState(false)
   const [showDeleteToast, setShowDeleteToast] = useState(false)
 
+  const [showToastWelcome, setShowToastWelcome] = useState(false)
+  const [showWelcomeBack , setShowWelcomeBack] = useState(false)
+
   useEffect(() => {
+    if (location.state && location.state.showWelcomeBack) {
+      setShowWelcomeBack(true)
+      setTimeout(() => {
+        setShowWelcomeBack(false)
+      }, 11000);
+    }
+  }, [location]);
+
+
+useEffect(() => {
+    if (location.state && location.state.showToastWelcome) {
+      setShowToastWelcome(true)
+      setTimeout(() => {
+        setShowToastWelcome(false)
+      }, 11000);
+    }
+  }, [location]);
+
+useEffect(() => {
     if (location.state && location.state.showDeleteToast) {
       setShowDeleteToast(true)
       setTimeout(() => {
@@ -59,10 +83,11 @@ const Home = () => {
 
   return (
     <>
-    
+      {showToastWelcome && <Welcome />   }
       {showPaymentDisplay && <PaymentDisplay />}
       {showPaymentRefused && <PaymentRefused />}
       {showDeleteToast && <AccountDelete />}
+      {showWelcomeBack && <WelcomeBackToast />}
       <Seo 
         title="Yizbet - Pronostics Sportifs Payants"
         description="Bienvenue sur Yizbet, votre plateforme de pronostics sportifs payants. Rejoignez-nous pour maximiser vos gains avec nos analyses expertes."

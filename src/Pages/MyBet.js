@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
-import Navbar from "../Components/Navbar";
-import imgBan from "../images/ImagesYizbet/mybettest.png";
-import Footer from "../Components/Footer";
-import axios from "axios";
-import { auth } from "../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import Skeleton from "react-loading-skeleton";
-import Pagination from "react-bootstrap/Pagination";
-import { useNavigate } from "react-router-dom";
-import AccountDelete from "../Toasts/AccountDelete";
-import Seo from "../Components/Seo";
+import React, { useState, useEffect } from "react"
+import Navbar from "../Components/Navbar"
+import imgBan from "../images/ImagesYizbet/mybettest.png"
+import Footer from "../Components/Footer"
+import axios from "axios"
+import { auth } from "../firebase"
+import { useAuthState } from "react-firebase-hooks/auth"
+import Skeleton from "react-loading-skeleton"
+import Pagination from "react-bootstrap/Pagination"
+import { useNavigate } from "react-router-dom"
+import AccountDelete from "../Toasts/AccountDelete"
+import Seo from "../Components/Seo"
+import ConfirmDelete from "../Toasts/ConfirmDelete"
 
 const MyBet = () => {
   const [user, loading] = useAuthState(auth)
@@ -20,17 +21,20 @@ const MyBet = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const predictionsPerPage = 4
   const [showDeleteToast, setShowDeleteToast] = useState(false)
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false)
+
+  const API_URL = process.env.REACT_APP_API_URL
 
   useEffect(() => {
     const fetchUserPredictions = async (firebaseUid) => {
       try {
         const userIdResponse = await axios.get(
-          `http://localhost:3008/user/${firebaseUid}`
-        );
+          `${API_URL}/user/${firebaseUid}`
+        )
         const internalUserId = userIdResponse.data.id
         const predictionsResponse = await axios.get(
-          `http://localhost:3008/api/userpredictions/${internalUserId}`
-        );
+          `${API_URL}/api/userpredictions/${internalUserId}`
+        )
         setPredictions(predictionsResponse.data)
         setLoadingPredictions(false)
       } catch (err) {
@@ -38,16 +42,16 @@ const MyBet = () => {
         setError(err)
         setLoadingPredictions(false)
       }
-    };
+    }
 
     if (user) {
       fetchUserPredictions(user.uid)
     }
-  }, [user]);
+  }, [user])
 
   useEffect(() => {
     if (!loading && !user) {
-      navigate("/login");
+      navigate("/login")
     }
   }, [user, loading, navigate])
 
@@ -73,23 +77,32 @@ const MyBet = () => {
         console.error("Erreur lors de la suppression du compte:", err);
   
         if (err.code === "auth/requires-recent-login") {
-          alert("Veuillez vous reconnecter pour supprimer votre compte.");
+          alert("Veuillez vous reconnecter pour supprimer votre compte.")
         } else {
-          alert("Erreur lors de la suppression du compte. Veuillez réessayer.");
+          alert("Erreur lors de la suppression du compte. Veuillez réessayer.")
         }
       }
     }
-  };
+  }
+
+  const handleConfirmResponse = (confirmed) => {
+    if (confirmed) {
+      handleDeleteAccount()
+    } else {
+      setShowConfirmDelete(false)
+    }
+  }
+  
   
 
-  const indexOfLastPrediction = currentPage * predictionsPerPage;
-  const indexOfFirstPrediction = indexOfLastPrediction - predictionsPerPage;
+  const indexOfLastPrediction = currentPage * predictionsPerPage
+  const indexOfFirstPrediction = indexOfLastPrediction - predictionsPerPage
   const currentPredictions = predictions.slice(
     indexOfFirstPrediction,
     indexOfLastPrediction
-  );
+  )
 
-  const totalPages = Math.ceil(predictions.length / predictionsPerPage);
+  const totalPages = Math.ceil(predictions.length / predictionsPerPage)
 
   return (
     <>
@@ -101,6 +114,8 @@ const MyBet = () => {
         image="https://www.yizbet.com/images/mybet-banner.jpg"
       />
       <Navbar />
+      {showConfirmDelete && <ConfirmDelete onConfirm={handleConfirmResponse} style={{ height:"700px"}} />}
+
       <img src={imgBan} style={{ width: "100%" }} />
       <div className="section1">
         <h3
@@ -129,7 +144,7 @@ const MyBet = () => {
 
             <div className="d-flex justify-content-center">
               <button
-                onClick={handleDeleteAccount}
+               onClick={() => setShowConfirmDelete(true)}
                 className="btn btn-danger mb-3 fontStrong"
               >
                 Supprimer compte
@@ -140,7 +155,7 @@ const MyBet = () => {
 
         <div className="container mt-5">
           {loadingPredictions ? (
-            <Skeleton count={5} height={30} />
+            <Skeleton count={1} height={130} style={{ borderRadius: '20px' , backgroundColor:"gray" }}/>
           ) : error ? (
             <p className="text-danger cardBet">
               Erreur lors de la récupération de vos historiques d'achats.
@@ -200,4 +215,4 @@ const MyBet = () => {
   );
 };
 
-export default MyBet;
+export default MyBet

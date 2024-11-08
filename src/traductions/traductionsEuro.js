@@ -98,4 +98,4 @@ const traductionsEuro = {
 
 };
 
-export default traductionsEuro;
+export default traductionsEuro

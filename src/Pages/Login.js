@@ -1,52 +1,56 @@
-import React, { useState } from 'react';
-import { auth, signInWithGooglePopup } from '../firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { Button, Form } from 'react-bootstrap';
-import LogoYizBet from '../images/premierlogo.png';
-import { Link, useNavigate } from 'react-router-dom';
-import googleLogo from "../images/Autres/Google.png";
+import React, { useState } from 'react'
+import { auth, signInWithGooglePopup } from '../firebase'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { Button, Form } from 'react-bootstrap'
+import LogoYizBet from '../images/premierlogo.png'
+import { Link, useNavigate } from 'react-router-dom'
+import googleLogo from "../images/Autres/Google.png"
 import Seo from "../Components/Seo"
-import "../GoogleButton.css";
+import "../GoogleButton.css"
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError(''); // Réinitialiser l'erreur
+    setError('');
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      navigate("/" , { state :{showWelcomeBack: true}  });
+      await signInWithEmailAndPassword(auth, email, password)
+      navigate("/", { state: { showWelcomeBack: true } })
     } catch (error) {
       if (error.code === 'auth/user-not-found') {
-        setError("Utilisateur non trouvé. Veuillez vérifier votre email ou créer un nouveau compte.");
+        setError("Utilisateur non trouvé. Veuillez vérifier votre email ou créer un nouveau compte.")
       } else if (error.code === 'auth/wrong-password') {
-        setError("Mot de passe incorrect. Veuillez réessayer.");
+        setError("Mot de passe incorrect. Veuillez réessayer.")
+      } else if (error.code === 'auth/invalid-credential') {
+        setError("Compte inexistant ou informations incorrectes. Veuillez vérifier votre email et mot de passe.")
       } else {
         setError(error.message);
       }
     }
-  };
+  }
+  
 
   const logGoogleUser = async () => {
     try {
-      const response = await signInWithGooglePopup();
+      const response = await signInWithGooglePopup()
       if (response.user) {
-        navigate("/" , { state :{showWelcomeBack: true}  });
+        navigate("/" , { state :{showWelcomeBack: true}  })
       } else {
-        setError("Erreur lors de la connexion avec Google.");
+        setError("Erreur lors de la connexion avec Google.")
       }
     } catch (error) {
       if (error.code === 'auth/account-exists-with-different-credential') {
-        setError("Un compte existe déjà avec cette adresse email mais avec des informations d'identification différentes.");
+        setError("Un compte existe déjà avec cette adresse email mais avec des informations d'identification différentes.")
+        
       } else {
-        setError(error.message);
+        setError(error.message)
       }
     }
-  };
+  }
 
   return (
     <>
@@ -66,13 +70,13 @@ const Login = () => {
         l'interdiction des jeux d'argent pour les personnes mineures.
       </h5>
 
-      <div className='mt-5'>
+      <div className='mt-4'>
         <button onClick={logGoogleUser} className="custom-google-button">
           <img src={googleLogo} style={{ height: "30px", width: "30px" }} alt="Google Logo" className="google-logo" />
           <span>Se connecter avec Google</span>
         </button>
       </div>
-      <Form className='w-50 mt-5' onSubmit={handleLogin}>
+      <Form className='w-50 mt-2' onSubmit={handleLogin}>
         <Form.Group style={{ width: "45%", textAlign: 'center'}} className='mb-3 mx-auto' controlId='formBasicEmail'>
           <Form.Label className='fontArchivo'  style={{ color: 'white', fontWeight: "bold" , fontSize:"25px" , fontStyle:"italic" }}>Adresse e-mail</Form.Label>
           <Form.Control
@@ -81,6 +85,11 @@ const Login = () => {
             placeholder='Enter email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            style={{
+              color: "black",
+              fontWeight: "bold",
+              fontSize: "20px",
+            }}
           />
         </Form.Group>
         <Form.Group style={{ width: "45%", textAlign: 'center'}} className='mb-3 mx-auto' controlId='formBasicPassword'>
@@ -91,11 +100,19 @@ const Login = () => {
             placeholder='Password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            style={{
+              color: "black",
+              fontWeight: "bold",
+              fontSize: "20px",
+      
+            }}
           />
         </Form.Group>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <p className="inputs2 animError" style={{ color: "red",  fontWeight: "bold",
+                    fontSize: "20px",
+                    fontStyle: "italic", }}>{error}</p>}
         <div className='buttonLogin'>
-          <Button className='' variant='warning' type='submit'>
+          <Button className='loginBtn fontStrong bgButtonLogin' variant='warning' type='submit'>
             Se connecter
           </Button>
         </div>
@@ -109,4 +126,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Login

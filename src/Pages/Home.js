@@ -16,6 +16,7 @@ import AccountDelete from "../Toasts/AccountDelete";
 import Seo from "../Components/Seo";
 import Welcome from "../Toasts/Welcome"
 import WelcomeBackToast from "../Toasts/WelcomeBackToast";
+import Skeleton from "react-loading-skeleton";
 
 const Home = () => {
   const location = useLocation();

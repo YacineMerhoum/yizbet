@@ -1,22 +1,22 @@
-import { useState, useEffect } from 'react';
-import Toast from 'react-bootstrap/Toast';
-import Logo from '../images/premierlogo.png';
-import '../index.css';  
+import { useState, useEffect } from 'react'
+import Toast from 'react-bootstrap/Toast'
+import Logo from '../images/premierlogo.png'
+import '../index.css'
 
 function NoTokens() {
-  const [fadeOut, setFadeOut] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setFadeOut(true);
-    }, 4000);
+      setFadeOut(true)
+    }, 4000)
 
-    return () => clearTimeout(timer);
-  }, []);
+    return () => clearTimeout(timer)
+  }, [])
 
   const handleClose = () => {
-    setFadeOut(true);
-  };
+    setFadeOut(true)
+  }
 
   return (
     <div className={`custom-toast-container ${fadeOut ? 'outAnimation' : ''}`}>
@@ -31,7 +31,7 @@ function NoTokens() {
         </Toast.Body>
       </Toast>
     </div>
-  );
+  )
 }
 
-export default NoTokens;
+export default NoTokens

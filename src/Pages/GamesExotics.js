@@ -1,138 +1,151 @@
-import React, { useState, useEffect } from "react";
-import useIntersectionObserver from "../hooks/useIntersectionObserver";
-import Button from "react-bootstrap/Button";
-import Skeleton from "react-loading-skeleton";
-import Navbar from "../Components/Navbar";
-import SectionPub from "../Components/SectionPub";
-import Footer from "../Components/Footer";
-import { useDispatch, useSelector } from "react-redux";
-import { oddsMatchs } from "../slices/matchSlice";
-import imgExoGame from "../images/Autres/matchexo2.png";
-import axios from "axios";
-import { auth } from "../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { getTotalBalance, deductTokens } from "../slices/balanceSlice";
-import LoginIn from "../Toasts/LoginIn";
-import PaymentBet from "../Toasts/PaymentBet";
-import NoToken from "../Toasts/NoTokens";
-import SuccessBet from "../Toasts/SuccessBet";
-import { Link } from "react-router-dom";
-import Seo from "../Components/Seo";
+import React, { useState, useEffect } from "react"
+import useIntersectionObserver from "../hooks/useIntersectionObserver"
+import Button from "react-bootstrap/Button"
+import Skeleton from "react-loading-skeleton"
+import Navbar from "../Components/Navbar"
+import SectionPub from "../Components/SectionPub"
+import Footer from "../Components/Footer"
+import { useDispatch, useSelector } from "react-redux"
+import { oddsMatchs } from "../slices/matchSlice"
+import imgExoGame from "../images/Autres/matchexo2.png"
+import axios from "axios"
+import { auth } from "../firebase"
+import { useAuthState } from "react-firebase-hooks/auth"
+import { getTotalBalance, deductTokens } from "../slices/balanceSlice"
+import LoginIn from "../Toasts/LoginIn"
+import PaymentBet from "../Toasts/PaymentBet"
+import NoToken from "../Toasts/NoTokens"
+import SuccessBet from "../Toasts/SuccessBet"
+import { Link } from "react-router-dom"
+import Seo from "../Components/Seo"
 
 const GamesExotics = () => {
-  const listGameDay = useSelector((state) => state.match.betGames);
-  const totalBalance = useSelector((state) => state.balance.totalBalance);
-  const dispatch = useDispatch();
-  const [user, loading] = useAuthState(auth);
 
-  const [showLoginToast, setShowLoginToast] = useState(false);
-  const [showTokensOk, setShowTokensOk] = useState(false);
-  const [showNoToken, setShowNoToken] = useState(false);
-  const [showSuccessBet, setShowSuccessBet] = useState(false);
-  const [matchData, setMatchData] = useState([]);
-  const [error, setError] = useState(null);
-  const [selectedMatch, setSelectedMatch] = useState(null);
+  const API_URL = process.env.REACT_APP_API_URL
+  
+  const listGameDay = useSelector((state) => state.match.betGames)
+  const totalBalance = useSelector((state) => state.balance.totalBalance)
+  const dispatch = useDispatch()
+  const [user, loading] = useAuthState(auth)
 
-  const [tempMatchIndex, setTempMatchIndex] = useState(null);
+  const [showLoginToast, setShowLoginToast] = useState(false)
+  const [showTokensOk, setShowTokensOk] = useState(false)
+  const [showNoToken, setShowNoToken] = useState(false)
+  const [showSuccessBet, setShowSuccessBet] = useState(false)
+  const [matchData, setMatchData] = useState([])
+  const [error, setError] = useState(null)
+  const [selectedMatch, setSelectedMatch] = useState(null)
+
+  const [tempMatchIndex, setTempMatchIndex] = useState(null)
 
   const [matchOneRef, isMatchOneVisible] = useIntersectionObserver({
     threshold: 0.1,
-  });
+  })
   const [matchTwoRef, isMatchTwoVisible] = useIntersectionObserver({
     threshold: 0.1,
-  });
+  })
   const [matchThreeRef, isMatchThreeVisible] = useIntersectionObserver({
     threshold: 0.1,
-  });
+  })
   const [matchFourRef, isMatchFourVisible] = useIntersectionObserver({
     threshold: 0.1,
-  });
+  })
   const [matchFiveRef, isMatchFiveVisible] = useIntersectionObserver({
     threshold: 0.1,
-  });
+  })
   const [matchSixRef, isMatchSixVisible] = useIntersectionObserver({
     threshold: 0.1,
-  });
+  })
+
+  const formatDate = () => {
+    const options = { weekday: "long", day: "numeric", month: "long", year: "numeric" }
+    return new Date().toLocaleDateString("fr-FR", options)
+  }
+
 
   useEffect(() => {
     const fetchMatches = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3008/api/match-odds"
-        );
-        console.log("Données brutes récupérées depuis l'API:", response.data);
+          `${API_URL}/api/match-odds`
+        )
+        console.log("Données brutes récupérées depuis l'API:", response.data)
         setMatchData(response.data);
       } catch (err) {
-        console.error("Erreur lors de la récupération des pronos:", err);
-        setError(err);
+        console.error("Erreur lors de la récupération des pronos:", err)
+        setError(err)
       }
-    };
+    }
 
-    fetchMatches();
-    dispatch(oddsMatchs());
-    window.scrollTo(0, 0);
-  }, [dispatch]);
+    fetchMatches()
+    dispatch(oddsMatchs())
+    window.scrollTo(0, 0)
+  }, [dispatch])
 
   useEffect(() => {
     if (user) {
-      dispatch(getTotalBalance(user.uid));
+      dispatch(getTotalBalance(user.uid))
     }
-  }, [dispatch, user]);
+  }, [dispatch, user])
 
   useEffect(() => {
     if (matchData.length > 0) {
-      console.log("Première donnée des pronostics de la BDD :", matchData[0]);
+      console.log("Première donnée des pronostics de la BDD :", matchData[0])
     }
-  }, [matchData]);
+  }, [matchData])
 
-  const handleConfirmPurchase = async (confirmed) => {
+
+  // POUR CONFIRMER LACHAT DU PRONO/
+  const paymentConfirm = async (confirmed) => {
     if (confirmed) {
       console.log("Début de la transaction pour l'achat de prédiction");
 
       const deductionResult = await dispatch(
         deductTokens({ userId: user.uid, amount: 1000 })
-      );
+      )
 
       if (deductionResult.meta.requestStatus === "fulfilled") {
         console.log(
           "Déduction de tokens réussie, affichage du toast et enregistrement du pari"
-        );
+        )
 
-        setShowTokensOk(false);
-        setShowSuccessBet(true);
-        setTimeout(() => setShowSuccessBet(false), 6000);
-        setSelectedMatch(tempMatchIndex);
+        setShowTokensOk(false)
+        setShowSuccessBet(true)
+        setTimeout(() => setShowSuccessBet(false), 6000)
+        setSelectedMatch(tempMatchIndex)
+
+        await dispatch(getTotalBalance(user.uid))    //JE MET A JOUR LE SOLDE TOTAL DU USER APRES DEDUCTION
 
         try {
-          console.log("Temp Match Index:", tempMatchIndex);
+          console.log("Temp Match Index:", tempMatchIndex)
           console.log(
             "Match Data at Temp Match Index:",
             matchData[tempMatchIndex]
-          );
+          )
 
-          const prediction = matchData[tempMatchIndex]?.prediction;
-          const matchId = matchData[tempMatchIndex]?.id;
+          const prediction = matchData[tempMatchIndex]?.prediction
+          const matchId = matchData[tempMatchIndex]?.id
 
-          console.log("Prediction:", prediction);
-          console.log("Match ID:", matchId);
+          console.log("Prediction:", prediction)
+          console.log("Match ID:", matchId)
 
           if (!matchId || !prediction) {
             console.error(
               "Erreur : match_id ou prediction est null ou undefined"
-            );
-            return;
+            )
+            return
           }
 
           const userIdResponse = await axios.get(
-            `http://localhost:3008/user/${user.uid}`
-          );
+            `${API_URL}/user/${user.uid}`
+          )
           const userDbId = userIdResponse.data.id;
 
           if (
             matchData[tempMatchIndex].id === matchId &&
             matchData[tempMatchIndex].prediction === prediction
           ) {
-            await axios.post("http://localhost:3008/api/userpredictions", {
+            await axios.post(`${API_URL}/api/userpredictions`, {
               user_id: userDbId,
               match_id: matchId,
               prediction: prediction,
@@ -142,11 +155,11 @@ const GamesExotics = () => {
             console.log(
               "Pronostic enregistré avec succès pour le match:",
               matchId
-            );
+            )
           } else {
             console.error(
               "Mismatch detected: Selected match does not correspond to fetched data"
-            );
+            )
           }
         } catch (error) {
           console.error("Erreur lors de l'insertion du pronostic :", error);
@@ -155,13 +168,13 @@ const GamesExotics = () => {
         console.error(
           "Erreur lors de la déduction des tokens :",
           deductionResult
-        );
+        )
       }
     }
   };
 
   const toggleMatchDetails = (matchIndex) => {
-    console.log("Match sélectionné avec index:", matchIndex);
+    console.log("Match sélectionné avec index:", matchIndex)
 
     if (!user) {
       setShowLoginToast(true);
@@ -169,25 +182,25 @@ const GamesExotics = () => {
       return;
     }
 
-    if (totalBalance < 10) {
-      setShowNoToken(true);
+    if (totalBalance < 10) { 
+      setShowNoToken(true)
       setTimeout(() => setShowNoToken(false), 6000);
-      return;
+      return
     }
 
     // Vérifiez si `matchIndex` correspond bien à une entrée dans `matchData`
     if (matchData[matchIndex]) {
-      console.log("Match Data for selected index:", matchData[matchIndex]);
+      console.log("Match Data for selected index:", matchData[matchIndex])
 
       // Si la balance est suffisante, continuez
       if (totalBalance >= 10) {
-        console.log("Total balance suffisant pour l'achat");
-        setSelectedMatch(null);
-        setShowTokensOk(true);
+        console.log("Total balance suffisant pour l'achat")
+        setSelectedMatch(null)
+        setShowTokensOk(true)
         setTempMatchIndex(matchIndex);
-        console.log("Temp Match Index après sélection:", matchIndex);
+        console.log("Temp Match Index après sélection:", matchIndex)
       } else {
-        console.error("Balance insuffisante");
+        console.error("Balance insuffisante")
       }
     } else {
       console.error("Index hors des limites pour matchData:", matchIndex);
@@ -204,7 +217,7 @@ const GamesExotics = () => {
     );
   }
 
-  console.log(totalBalance + " Je suis le total de la balance !");
+  console.log(totalBalance + " Je suis le total de la balance !")
 
   return (
     <>
@@ -217,7 +230,7 @@ const GamesExotics = () => {
       />
       <Navbar />
       {showLoginToast && <LoginIn />}
-      {showTokensOk && <PaymentBet onConfirm={handleConfirmPurchase} />}
+      {showTokensOk && <PaymentBet onConfirm={paymentConfirm} />}
       {showNoToken && <NoToken />}
       {showSuccessBet && <SuccessBet />}
       <div className="">
@@ -274,6 +287,13 @@ const GamesExotics = () => {
             rencontres à venir, comme celles de demain ou plus tard, il faudra
             faire preuve de patience 😎.
           </p>
+
+          <p
+      className="text-white text-center mb-3 container fontArchivo"
+      style={{ fontWeight: "bold", fontStyle: "italic", fontSize: "22px" }}
+    >
+      Matchs du jour : {formatDate()}
+    </p>
 
           <div className="row justify-content-center bgodds">
             <div
@@ -551,4 +571,4 @@ const GamesExotics = () => {
   );
 };
 
-export default GamesExotics;
+export default GamesExotics

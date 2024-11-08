@@ -2,113 +2,92 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { fetchMatchDay } from "../slices/sectionSlice";
-import traductions from "../traductions/traductionsEuro";
+import { oddsMatchs } from "../slices/matchSlice";
+import useIntersectionObserver from "../hooks/useIntersectionObserver";
+import Button from 'react-bootstrap/Button';
+import { Link } from "react-router-dom";
 
-
-const Section = () => {
-  const listGameDay = useSelector((state) => state.matchDay.matchDayOdds);
-  const dispatch = useDispatch();
-
-
-
-
-  console.log(listGameDay , "Hello je suis la pour aider !" );
-  const test = listGameDay
-
-  useEffect(() => {
-
-    dispatch(fetchMatchDay());
-  }, [dispatch]);
+const MyFunBet = () => {
+  const listGameDay = useSelector((state) => state.match.betGames)
+  const dispatch = useDispatch()
 
  
+  const [matchOneRef, isMatchOneVisible] = useIntersectionObserver({ threshold: 0.1 })
+  const [matchTwoRef, isMatchTwoVisible] = useIntersectionObserver({ threshold: 0.1 })
 
-  if (!listGameDay || !listGameDay.matches) {
-    return null;
+  useEffect(() => {
+    dispatch(oddsMatchs())
+  }, [dispatch])
+
+  if (!listGameDay) {
+    return (
+      <div className="text-center">
+        <Skeleton height={20} width={200} />
+        <Skeleton height={20} width={150} />
+        <Skeleton height={20} width={100} />
+      </div>
+    );
+  }
+  function scrollToTop() {
+    window.scrollTo(0, 0)
   }
 
-  let awayTeam = "Loading...";
-  let homeTeam = "Loading...";
-  let awayTeam2 = "Loading...";
-  let homeTeam2 = "Loading...";
-
-  if (listGameDay.matches.length > 0) {
-    awayTeam = listGameDay.matches[0].awayTeam.name;
-    homeTeam = listGameDay.matches[0].homeTeam.name;
-
-    if (listGameDay.matches.length > 1) {
-      awayTeam2 = listGameDay.matches[1].awayTeam.name;
-      homeTeam2 = listGameDay.matches[1].homeTeam.name;
-    }
-  }
+  let matchOne = Math.floor(Math.random() * 7)
+  let matchTwo
+  
+  do {
+    matchTwo = Math.floor(Math.random() * 7)
+  } while (matchTwo === matchOne)
 
   return (
     <>
-       
       <div className="text-section1"></div>
       <div className="text-center section1">
         <h3 className="text-white text-center mb-5 text-warning fontArchivoBold" style={{ fontSize: "40px"}}>
-          <em>Les gros MATCHS du jour </em>🔥
+        <em>Les gros MATCHS du jour </em>🔥
         </h3>
         <div className="row justify-content-between">
-          <div className="col-12 col-md-6 ">
-            {listGameDay.matches[0] ? (
-              <>
-                {listGameDay.matches[1].hasStarted && (
-                  <p className="text-white gamesDay">
-                    {listGameDay.matches[1].score.fullTime.home} - {listGameDay.matches[1].score.fullTime.away}
-                    <i className="ms-2 fa-solid fa-circle fa-fade fa-sm" style={{ color: "#e01b24" }}></i>
-                  </p>
-                )}
-                <p className="gamesDay">
-                  {homeTeam} vs {traductions[awayTeam]}
-                  <div className="">
-                  <button className="ms-5 m-1 btnOdsSkew">2.50</button>
-                  <button className="m-1 btnOdsSkew">2.50</button>
-                  <button className="m-1 btnOdsSkew">2.50</button>
-                  </div>
-                </p>
-              </>
-            ) : (
-              <>
-                <Skeleton height={20} />
-                <Skeleton height={20} width={150} />
-                <Skeleton height={20} width={100} count={3} />
-              </>
-            )}
+          <div
+            className="col-12 col-md-6"
+            ref={matchOneRef}
+            style={{ transition: 'opacity 1.5s', opacity: isMatchOneVisible ? 1 : 0 }}
+          >
+            <p className="gamesDay text-center">{listGameDay.data[matchOne].sport_title}</p>
+            <p className="gamesDay">
+              {listGameDay.data[matchOne].home_team} vs {listGameDay.data[matchOne].away_team}
+              <div className="">
+              <button className="ms-5 m-1 btnOdsSkew">{listGameDay.data[matchOne].bookmakers[0].markets[0].outcomes[1].price}</button>
+              <button className="m-1 btnOdsSkew">{listGameDay.data[matchOne].bookmakers[0].markets[0].outcomes[2].price}</button>
+              <button className="m-1 btnOdsSkew">{listGameDay.data[matchOne].bookmakers[0].markets[0].outcomes[0].price}</button>
+              </div>
+           </p>
           </div>
-          <div className="col-12 col-md-6">
-            {listGameDay.matches[1] ? (
-              <>
-                {listGameDay.matches[0].hasStarted && (
-                  <p className="text-white gamesDay">
-                    {listGameDay.matches[0].score.fullTime.home} - {listGameDay.matches[0].score.fullTime.away}
-                    <i className="ms-2 fa-solid fa-circle fa-fade fa-sm" style={{ color: "#e01b24" }}></i>
-                  </p>
-                )}
-                <p className="gamesDay">
-                  {traductions[homeTeam2]} vs {traductions[awayTeam2]}
-                  <div className="">
-                  <button className="ms-5 m-1 btnOdsSkew">2.50</button>
-                  <button className="m-1 btnOdsSkew">2.50</button>
-                  <button className="m-1 btnOdsSkew">2.50</button>
-                  </div>
-                </p>
-              </>
-            ) : (
-              <>
-                <Skeleton height={20} />
-                <Skeleton height={20} width={150} />
-                <Skeleton height={20} width={100} count={3} />
-              </>
-            )}
+          <div
+            className="col-12 col-md-6"
+            ref={matchTwoRef}
+            style={{ transition: 'opacity 1.5s', opacity: isMatchTwoVisible ? 1 : 0 }}
+          >
+            <p className="gamesDay text-center">{listGameDay.data[matchTwo].sport_title}</p>
+            <p className="gamesDay">
+              {listGameDay.data[matchTwo].home_team} vs {listGameDay.data[matchTwo].away_team}
+              <div>
+              <button className="ms-5 m-1 btnOdsSkew">{listGameDay.data[matchTwo].bookmakers[0].markets[0].outcomes[1].price}</button>
+              <button className="m-1 btnOdsSkew">{listGameDay.data[matchTwo].bookmakers[0].markets[0].outcomes[2].price}</button>
+              <button className="m-1 btnOdsSkew">{listGameDay.data[matchTwo].bookmakers[0].markets[0].outcomes[0].price}</button>
+              </div>
+            </p>
           </div>
         </div>
-       
+        <Link to="/games-exotics">
+          <Button className="m-5 btnWatchAllGame" onClick={scrollToTop} variant="secondary" size="lg" style={{ fontWeight: "bold", color: "#ffed00" }}>
+            <em>Voir les MATCHS éxotiques du jour </em><span> 🤑</span>
+          </Button>
+        </Link>
       </div>
-   
     </>
   );
 };
 
-export default Section;
+export default MyFunBet;
+
+

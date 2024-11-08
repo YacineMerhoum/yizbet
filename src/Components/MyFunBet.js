@@ -8,16 +8,16 @@ import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
 
 const MyFunBet = () => {
-  const listGameDay = useSelector((state) => state.match.betGames);
-  const dispatch = useDispatch();
+  const listGameDay = useSelector((state) => state.match.betGames)
+  const dispatch = useDispatch()
 
-  // Deux hooks pour deux divs différentes
-  const [matchOneRef, isMatchOneVisible] = useIntersectionObserver({ threshold: 0.1 });
-  const [matchTwoRef, isMatchTwoVisible] = useIntersectionObserver({ threshold: 0.1 });
+ 
+  const [matchOneRef, isMatchOneVisible] = useIntersectionObserver({ threshold: 0.1 })
+  const [matchTwoRef, isMatchTwoVisible] = useIntersectionObserver({ threshold: 0.1 })
 
   useEffect(() => {
-    dispatch(oddsMatchs());
-  }, [dispatch]);
+    dispatch(oddsMatchs())
+  }, [dispatch])
 
   if (!listGameDay) {
     return (

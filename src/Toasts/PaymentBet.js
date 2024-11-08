@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import Toast from 'react-bootstrap/Toast';
-import Button from 'react-bootstrap/Button';
-import Logo from '../images/premierlogo.png';
-import '../index.css';
+import React, { useState, useEffect } from 'react'
+import Toast from 'react-bootstrap/Toast'
+import Button from 'react-bootstrap/Button'
+import Logo from '../images/premierlogo.png'
+import '../index.css'
 
 function PaymentBet({ onConfirm }) {
   const [fadeOut, setFadeOut] = useState(false)
@@ -10,29 +10,29 @@ function PaymentBet({ onConfirm }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       setFadeOut(true)
-    }, 10000);
+    }, 10000)
 
     return () => clearTimeout(timer)
-  }, []);
+  }, [])
 
   const handleConfirm = () => {
     onConfirm(true)
     setFadeOut(true)
-  };
+  }
 
   const handleNoConfirm = () => {
     setFadeOut(true)
     setTimeout(() => {
       onConfirm(false)
-    }, 400);
-  };
+    }, 400)
+  }
 
   const handleClose = () => {
     setFadeOut(true)
     setTimeout(() => {
       onConfirm(false)
-    }, 400);
-  };
+    }, 400)
+  }
 
   return (
     <div className={`custom-toast-container2 ${fadeOut ? 'outAnimation' : ''}`}>
@@ -71,7 +71,7 @@ function PaymentBet({ onConfirm }) {
         </Toast.Body>
       </Toast>
     </div>
-  );
+  )
 }
 
-export default PaymentBet;
+export default PaymentBet

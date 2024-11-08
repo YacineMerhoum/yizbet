@@ -1,48 +1,50 @@
-import React, { useEffect } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
-import Navbar from "../Components/Navbar";
-import SectionPub from "../Components/SectionPub";
-import Footer from "../Components/Footer";
-import { auth } from "../firebase";
-import { getAuth } from "firebase/auth";
+import React, { useEffect } from "react"
+import { useAuthState } from "react-firebase-hooks/auth"
+import { Link, useNavigate } from "react-router-dom"
+import Navbar from "../Components/Navbar"
+import SectionPub from "../Components/SectionPub"
+import Footer from "../Components/Footer"
+import { auth } from "../firebase"
+import { getAuth } from "firebase/auth"
 import logo from "../images/premierlogo.png"
-import Seo from "../Components/Seo";
-import { useSelector } from "react-redux";
+import Seo from "../Components/Seo"
+import { useSelector } from "react-redux"
+
+const API_URL = process.env.REACT_APP_API_URL
 
 const Tokens = () => {
-  const [user, loading] = useAuthState(auth);
-  const navigate = useNavigate();
+  const [user, loading] = useAuthState(auth)
+  const navigate = useNavigate()
   const userState = useSelector((state)=>state.user.user)
-  console.log('user', userState);
+  console.log('user', userState)
   
   useEffect(() => {
     if (!loading && !user) {
       navigate("/login")
     }
-  }, [user, loading, navigate]);
+  }, [user, loading, navigate])
   
   const handleCheckout = async (priceId) => {
     try {
       const auth = getAuth();
-      const user = auth.currentUser;
+      const user = auth.currentUser
 
     if (!user) {
-      console.error('User not authenticated');
-      return;
+      console.error('User not authenticated')
+      return
     }
 
     const token = await user.getIdToken()
 
     
-      const response = await fetch('http://localhost:3008/create-checkout-session', {
+      const response = await fetch(`${API_URL}/create-checkout-session`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({ priceId , userId : userState}),
-      });
+      })
 
       const data = await response.json();
 
@@ -50,16 +52,16 @@ const Tokens = () => {
         window.location.href = data.url
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error:', error)
     }
-  };
+  }
 
   if (loading) {
     return (
       <div className="loading">
         <img className="logoLoading" src={logo} alt="Loading..." />
       </div>
-    );
+    )
   }
 
   return (
@@ -98,9 +100,9 @@ const Tokens = () => {
             <p className="gamesDay text-center" style={{ fontSize: "40px" }}>20 Tokens = 20€
               <button className="ms-5 m-1 btnOdsSkew" onClick={() => handleCheckout('price_1PZaM1J7Z5palmd7RBUwXkZf')}>20€</button>
             </p>
-            <p className="gamesDay text-center" style={{ fontSize: "40px" }}>35 Tokens = 30€
+            <p className="gamesDay text-center" style={{ fontSize: "40px" }}>30 Tokens = 30€
               <button className="ms-5 m-1 btnOdsSkew" onClick={() => handleCheckout('price_1PZteEJ7Z5palmd71M8eFueu')}>30€</button>
-              <span style={{ color: "orange" }}> 15% de remise 🤑 </span>
+              
             </p>
           </div>
         </div>
@@ -108,7 +110,7 @@ const Tokens = () => {
         <Footer />
       </>
     )
-  );
-};
+  )
+}
 
-export default Tokens;
+export default Tokens

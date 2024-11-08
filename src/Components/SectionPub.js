@@ -1,10 +1,10 @@
 import React from 'react'
-import PubImg from "../images/baniere.jpeg"
+import PubImg from "../images/maillotYizbet/Design sans titre(4).png"
 
 const SectionPub = () => {
   return (
-    <div className='' style={{background : "000814" , display: "flex" ,  justifyContent: "center" }}  >
-        <img className="pub" style={{padding: "50px",  width : "80%"  , borderRadius: "90px"}} alt="Yizbet Pub" src={PubImg}/>
+    <div className=''  >
+        <img className="pub" style={{padding:"15px",  width : "100%"  , borderRadius: "20px"}} alt="Yizbet Pub" src={PubImg}/>
     </div>
   )
 }

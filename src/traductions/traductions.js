@@ -1,26 +1,26 @@
 
 
 const equipesTraduction = {
-  "AJ Auxerre": "AJ Auxerre",
-  "Angers SCO": "Angers SCO",
-  "AS Monaco FC": "AS Monaco",
-  "AS Saint-Étienne": "Saint-Étienne",
+  "AJ Auxerre": "Auxerre",
+  "Angers SCO": "Angers",
+  "AS Monaco FC": "Monaco",
+  "AS Saint-Étienne": "ASSE",
   "FC Nantes": "FC Nantes",
   "Le Havre AC": "Le Havre AC",
   "Lille OSC": "Lille OSC",
-  "Montpellier HSC": "Montpellier HSC",
+  "Montpellier HSC": "Montpellier",
   "OGC Nice": "OGC Nice",
-  "Olympique Lyonnais": "Olympique Lyonnais",
+  "Olympique Lyonnais": "Oly.Lyonnais",
   "Olympique de Marseille": "Marseille",
   "Paris Saint-Germain FC": "Paris SG",
   "Racing Club de Lens": "RC Lens",
-  "RC Strasbourg Alsace": "RC Strasbourg",
-  "Stade Brestois 29": "Stade Brestois",
-  "Stade de Reims": "Stade de Reims",
-  "Stade Rennais FC 1901": "Stade Rennais",
-  "Toulouse FC": "Toulouse FC"
+  "RC Strasbourg Alsace": "Strasbourg",
+  "Stade Brestois 29": "Brest",
+  "Stade de Reims": "Reims",
+  "Stade Rennais FC 1901": "Rennes",
+  "Toulouse FC": "Toulouse"
   
   
 };
 
-export default equipesTraduction;
+export default equipesTraduction

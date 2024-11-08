@@ -29,13 +29,26 @@ body {
   font-size: 15px;
 }
 
+.fontFooter {
+  font-family: "Inter", sans-serif;
+  
+  
+}
+.fontFooter1 {
+  font-family: "Inter", sans-serif;
+  font-size: 17px;
+  
+  
+}
+
+
 .bgNavbar{
   background-color: var(--color-near-black) !important;
   
   
 }
 .cardBet{
-  background-color: var(--color-dark-blue);
+  background: linear-gradient(to right, var(--color-darker-blue), var(--color-near-black));
   color: var(--color-primary);
   border-radius: 15px;
   font-family: "Inter", sans-serif;
@@ -107,20 +120,24 @@ code {
 }
 
 .carouselBg {
-  background-color: #000814c6;
+  background-color: #0008147a;
   color: white;
   margin-top: 120px !important;
+  border-radius: 25px;
+  
 }
 
 .LogoCompet {
-  height: 50px;
-  border-radius: 50%;
+  height: 35px;
+  border-radius: 60px;
+  
 }
 
 .flagMenu {
-  height: 30px;
-  margin: 20px;
+  height: 40px;
+  margin: 30px;
   border-radius: 100%;
+  z-index: 999;
 }
 
 .btn_betOdds {
@@ -335,6 +352,12 @@ code {
   right: 20px;
   z-index: 999;
 }
+.custom-toast-container3 {
+  position: fixed;
+  top: 35%;
+  right: 37%;
+  z-index: 999;
+}
 
 /* EXCEPTION POUR LA DEMANDE DE DEDUCTION TOKENS  */
 .custom-toast-container2 {
@@ -354,7 +377,25 @@ code {
   border-radius: 8px;
   animation: Toast 2s ease 0s 1 normal forwards;
 }
-.custom-toast2 .toast-header {
+/* TOAST DE SUPRESSION DE COMPTE  */
+.custom-toast3 {
+  width: 400px;
+  height: 200px;
+  background-color: #2f3031;
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  border-radius: 8px;
+  animation: Toast 2s ease 0s 1 normal forwards;
+}
+/* TOAST DE SUPRESSION DE COMPTE  */
+
+.custom-toast2  .toast-header {
+  background-color: var(--color-darker-blue);
+  color: var(--color-primary);
+}
+.custom-toast3 .toast-header {
   background-color: var(--color-darker-blue);
   color: var(--color-primary);
 }
@@ -505,4 +546,20 @@ code {
 .compte:hover{
   transition: 0.4s;
   color: #FBEC5D;
+}
+
+.animError{
+  animation: error 1s ease 0s 1 normal forwards;
+}
+@keyframes error {
+	0%,
+	50%,
+	100% {
+		opacity: 1;
+	}
+
+	25%,
+	75% {
+		opacity: 0;
+	}
 }

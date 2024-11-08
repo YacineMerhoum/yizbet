@@ -8,26 +8,34 @@ import imgBan from "../images/ImagesYizbet/banierematch2.png";
 import Seo from "../Components/Seo";
 
 const About = () => {
-
-  const [bannerRef, bannerVisible] = useIntersectionObserver({ threshold: 0.5 });
-  const [imageRef1, imageVisible1] = useIntersectionObserver({ threshold: 0.5 });
-  const [imageRef2, imageVisible2] = useIntersectionObserver({ threshold: 0.5 });
+  const [bannerRef, bannerVisible] = useIntersectionObserver({
+    threshold: 0.5,
+  });
+  const [imageRef1, imageVisible1] = useIntersectionObserver({
+    threshold: 0.5,
+  });
+  const [imageRef2, imageVisible2] = useIntersectionObserver({
+    threshold: 0.5,
+  });
 
   return (
     <>
-    <Seo 
-  title="Yizbet - À Propos de Nous"
-  description="Découvrez l'histoire de Yizbet, notre mission, et comment nous aidons nos utilisateurs à maximiser leurs gains grâce à des pronostics sportifs de qualité."
-  keywords="Yizbet, à propos, mission, pronostics sportifs"
-  url="https://www.yizbet.com/about-us"
-  image="https://www.yizbet.com/images/about-us-banner.jpg"
-/>
+      <Seo
+        title="Yizbet - À Propos de Nous"
+        description="Découvrez l'histoire de Yizbet, notre mission, et comment nous aidons nos utilisateurs à maximiser leurs gains grâce à des pronostics sportifs de qualité."
+        keywords="Yizbet, à propos, mission, pronostics sportifs"
+        url="https://www.yizbet.com/about-us"
+      />
 
       <Navbar />
-      <img 
-        ref={bannerRef} 
-        src={imgBan} 
-        style={{ width: "100%", transition: 'opacity 1.5s', opacity: bannerVisible ? 1 : 0 }}
+      <img
+        ref={bannerRef}
+        src={imgBan}
+        style={{
+          width: "100%",
+          transition: "opacity 1.5s",
+          opacity: bannerVisible ? 1 : 0,
+        }}
       />
       <div className="section1">
         <div className="">
@@ -116,34 +124,51 @@ const About = () => {
           <h3
             className="text-center mt-5 fontArchivoBold"
             style={{ color: "white", fontWeight: "bold" }}
-            >
+          >
             <em>Rejoignez-nous</em>
             <span> 🤩</span>
-            </h3>
-            <p
-              className="text-white text-center mb-5 container mt-5"
-              style={{ fontWeight: "bold", fontSize: "18px" }}
-            >
-              Nous vous invitons à explorer nos pronostics et à vous joindre à
-              notre communauté de passionnés. Pour toute question ou pour en
-              savoir plus sur nos services , n'hésitez pas à nous écrire un mail : 
-              <span className="text-warning"> yizbet.service.conso@gmail.com</span> . <br />Merci de faire partie de l'aventure Yizbet et de partager avec
-              nous la joie du football !
-            </p>
-          <div className="d-flex justify-content-center m-5">
+          </h3>
+          <p
+            className="text-white text-center mb-5 container mt-5"
+            style={{ fontWeight: "bold", fontSize: "18px" }}
+          >
+            Nous vous invitons à explorer nos pronostics et à vous joindre à
+            notre communauté de passionnés. Pour toute question ou pour en
+            savoir plus sur nos services , n'hésitez pas à nous écrire un mail :
+            <span className="text-warning">
+              {" "}
+              yizbet.service.conso@gmail.com
+            </span>{" "}
+            . <br />
+            Merci de faire partie de l'aventure Yizbet et de partager avec nous
+            la joie du football !
+          </p>
+          <div className="d-flex flex-wrap justify-content-center m-5">
             <img
               src={YbPub}
               ref={imageRef1}
-              className="mt-3 m-5"
+              className="mt-3 m-5 imgAbout"
               title="Rejoignez-nous"
-              style={{ height: "500px", borderRadius: "10%", transition: 'opacity 1.5s', opacity: imageVisible1 ? 1 : 0 }}
+              style={{
+                width: "100%",
+                maxWidth: "500px",
+                borderRadius: "10%",
+                transition: "opacity 1.5s",
+                opacity: imageVisible1 ? 1 : 0,
+              }}
             />
             <img
               src={image}
               ref={imageRef2}
-              className="mt-3 m-5"
+              className="mt-3 m-5 imgAbout"
               title="Rejoignez-nous"
-              style={{ height: "500px", borderRadius: "10%", transition: 'opacity 1.5s', opacity: imageVisible2 ? 1 : 0 }}
+              style={{
+                width: "100%",
+                maxWidth: "500px",
+                borderRadius: "10%",
+                transition: "opacity 1.5s",
+                opacity: imageVisible2 ? 1 : 0,
+              }}
             />
           </div>
         </div>

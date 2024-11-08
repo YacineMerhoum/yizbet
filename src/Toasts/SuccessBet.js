@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import Toast from 'react-bootstrap/Toast';
-import Logo from '../images/premierlogo.png';
-import '../index.css';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import Toast from 'react-bootstrap/Toast'
+import Logo from '../images/premierlogo.png'
+import '../index.css'
+import { Link } from 'react-router-dom'
 
 function SuccessBet() {
-  const [fadeOut, setFadeOut] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setFadeOut(true);
-    }, 7000);
+      setFadeOut(true)
+    }, 7000)
 
-    return () => clearTimeout(timer);
-  }, []);
+    return () => clearTimeout(timer)
+  }, [])
 
   const handleClose = () => {
-    setFadeOut(true);
-  };
+    setFadeOut(true)
+  }
 
   return (
     <div className={`custom-toast-container ${fadeOut ? 'outAnimation' : ''}`}>
@@ -36,7 +36,7 @@ function SuccessBet() {
         </Toast.Body>
       </Toast>
     </div>
-  );
+  )
 }
 
-export default SuccessBet;
+export default SuccessBet

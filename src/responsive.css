@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,900;1,14..32,900&display=swap');
+
 :root {
     --color-primary: #FFD60A;
     --color-secondary: #FBEC5D;
@@ -38,6 +42,7 @@
         margin-top: 15%;
         margin-bottom: 15%;
     }
+   
   }
 /* Navbar mobile  */
 
@@ -91,7 +96,7 @@
      }
      .inputs2 {
         width: 200px !important;
-        margin-left: 30px !important;
+        margin-left: 46px !important;
      }
      .sizeImg2{
        display: none;
@@ -102,13 +107,46 @@
         right: 190px;
         z-index: 999;
       }
+      .loginBtn{
+        color: white;
+        margin-top: 5%;
+        margin-left: -7px;
+      }
+      .carouselBg {
+        width: 350px;
+        margin-left: -46px;
+        
+      }
+      .custom-toast-container {
+        position:sticky;
+        top: 50%;
+        right: 25%;
+        z-index: 999;
+      }
+      .custom-toast-container2 {
+        position: sticky;
+        top: 50%;
+        right: 10%;
+        z-index: 999;
+      }
+      .custom-toast2 {
+        height: 290px;
+      }
+      .custom-toast-container3 {
+        position: sticky;
+        top: 50%;
+        right: 10%;
+        z-index: 999;
+      }
+      
+
      
 }
     
     
 
 /* IPAD ECT.. */
-@media (min-width: 600px) and (max-width: 810px) {
+@media (min-width: 600px) and (max-width: 1100px) {
     .tableStanding {
         margin-left: 10%;
     }
@@ -123,6 +161,23 @@
       height: 10%;
       width: 90%;
      }
+     .loginBtn{
+      color: white;
+      margin-top: 5%;
+      margin-left: -23px;
+    }
+    .custom-toast-container2 {
+      
+      top: 30%;
+      right: 25%;
+      z-index: 999;
+    }
+    .custom-toast-container3{
+      top: 30%;
+      right: 25%;
+      z-index: 999;
+
+    }
      
     }
 
@@ -144,7 +199,26 @@
     }
       
 
-    @media (max-width: 600px) {
+    @media (min-width: 900px) {
       
+      .inputs2{
+        width: 60% !important;
+        margin-left: 19%;
+        font-size: 20px;
+        font-family: "Inter", sans-serif;
+        text-align: center;
+          
+      }
+      .inputs {
+        width: 70%;
+        margin-left: 15%;
+      }
+
+      .loginBtn{
+        margin-top: 5%;
+        color: white;
+      }
       
     }
+
+    /* caroussel */

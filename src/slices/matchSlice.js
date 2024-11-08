@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { keysOdd } from '../dataAPI/keysOdd';
 import tf1 from "../images/TV/TF1-logo.png"
 
+
+const API_URL = process.env.REACT_APP_API_URL
 
 
 // CAROUSEL 1
@@ -10,9 +11,9 @@ export const fetchMatchDetails = createAsyncThunk(
   'match/fetchMatchDetails',
   async () => {
     
-      const response = await axios.get('http://localhost:3008/data/matchesRoute.json', {
+      const response = await axios.get(`${API_URL}/data/matchesRoute.json`, {
         
-      });
+      })
       return response.data;
     }
   
@@ -22,42 +23,15 @@ export const oddsMatchs = createAsyncThunk(
   'match/oddsMatchs',
   async () => {
     
-    const response = await axios.get('http://localhost:3008/data/matchesOdds.json', {
+    const response = await axios.get(`${API_URL}/data/matchesOdds.json`, {
       
     });
     return response.data;
   }
 
-);
-
-
-
+)
 
 // COTES DES MATCHS 
-export const fetchBetEuro = createAsyncThunk(
-  'match/fetchBetEuro',
-  async () => {
-    try {
-      const response = await axios.get('https://api.the-odds-api.com/v4/sports/soccer_uefa_european_championship/events/52cc97f3f972aff6eaf080168879d2b8/odds?regions=eu&oddsFormat=decimal&apiKey=98ff544b7a7c7c2b7ab4885362a8c174');
-      const oddsData = response.data;
-      const homeTeamOdds = oddsData?.bookmakers[0]?.markets[0]?.outcomes[0]?.price || null;
-      const awayTeamOdds = oddsData?.bookmakers[0]?.markets[0]?.outcomes[1]?.price || null;
-      const drawOdds = oddsData?.bookmakers[0]?.markets[0]?.outcomes[2]?.price || null;
-      return {
-        homeTeamOdds,
-        drawOdds,
-        awayTeamOdds,
-      };
-    } catch (error) {
-      throw new Error('Côtes non disponibles');
-    }
-  }
-);
-
-
-
-
-
 const initialState = {
   channelTv: {
     tf1: tf1,
@@ -100,44 +74,29 @@ const matchSlice = createSlice({
       })
       .addCase(fetchMatchDetails.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.matchDetails = action.payload;
+        state.matchDetails = action.payload
       })
       .addCase(fetchMatchDetails.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error.message;
-      })
-
-      
-      .addCase(fetchBetEuro.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchBetEuro.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.betEuro = action.payload;
-      })
-      .addCase(fetchBetEuro.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
+        state.error = action.error.message
       })
 
       
       // TEST JSON
       .addCase(oddsMatchs.pending, (state) => {
-        state.status = 'loading';
+        state.status = 'loading'
       })
       .addCase(oddsMatchs.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.betGames = action.payload;
+        state.betGames = action.payload
       })
       .addCase(oddsMatchs.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error.message;
+        state.error = action.error.message
       })
       
-      
-
   },
-});
+})
 
-export default matchSlice.reducer;
-export const { setChannelTv } = matchSlice.actions;
+export default matchSlice.reducer
+export const { setChannelTv } = matchSlice.actions

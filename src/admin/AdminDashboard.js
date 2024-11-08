@@ -57,8 +57,8 @@ const AdminDashboard = () => {
         <table className="table mt-4">
           <thead>
             <tr className="fontArchivo text-center fst-italic ">
-              <th>ID</th>
-              <th>Sport Key</th>
+              
+              
               <th>Sport Title</th>
               <th>Home Team</th>
               <th>Away Team</th>
@@ -69,8 +69,8 @@ const AdminDashboard = () => {
           <tbody>
             {matchOdds.map((match) => (
               <tr className="font"  key={match.id}>
-                <td>{match.id}</td>
-                <td>{match.sport_key}</td>
+                
+                
                 <td>{match.sport_title}</td>
                 <td>{match.home_team}</td>
                 <td>{match.away_team}</td>

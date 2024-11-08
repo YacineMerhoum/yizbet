@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
 
 
 const API_URL = process.env.REACT_APP_API_URL
@@ -14,7 +14,7 @@ export const getTotalBalance = createAsyncThunk(
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
-      });
+      })
       console.log('Réponse complète de l\'API:', response.data)
       return response.data.totalBalance
     } catch (error) {
@@ -22,7 +22,7 @@ export const getTotalBalance = createAsyncThunk(
       return thunkAPI.rejectWithValue(error.message)
     }
   }
-);
+)
 
 // Action pour déduire des tokens
 export const deductTokens = createAsyncThunk(
@@ -37,15 +37,15 @@ export const deductTokens = createAsyncThunk(
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
-      });
-      console.log('Réponse de l\'API après déduction des tokens:', response.data);
-      return amount;  // Retourner le montant déduit pour mettre à jour le state localement
+      })
+      console.log('Réponse de l\'API après déduction des tokens:', response.data)
+      return amount
     } catch (error) {
-      console.error('Erreur lors de la déduction des tokens:', error);
-      return thunkAPI.rejectWithValue(error.message);
+      console.error('Erreur lors de la déduction des tokens:', error)
+      return thunkAPI.rejectWithValue(error.message)
     }
   }
-);
+)
 
 const balanceSlice = createSlice({
   name: 'balance',
@@ -61,7 +61,7 @@ const balanceSlice = createSlice({
         state.status = 'loading'
       })
       .addCase(getTotalBalance.fulfilled, (state, action) => {
-        console.log('Payload de getTotalBalance:', action.payload);
+        console.log('Payload de getTotalBalance:', action.payload)
         state.status = 'succeeded'
         state.totalBalance = action.payload
       })
@@ -69,19 +69,21 @@ const balanceSlice = createSlice({
         state.status = 'failed';
         state.error = action.payload
       })
+
+
       .addCase(deductTokens.pending, (state) => {
         state.status = 'loading'
       })
       .addCase(deductTokens.fulfilled, (state, action) => {
-        console.log('Montant déduit:', action.payload);
+        console.log('Montant déduit:', action.payload)
         state.status = 'succeeded'
         state.totalBalance -= action.payload
       })
       .addCase(deductTokens.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload
-      });
+      })
   }
-});
+})
 
-export default balanceSlice.reducer;
+export default balanceSlice.reducer

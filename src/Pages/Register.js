@@ -23,6 +23,7 @@ const Register = () => {
   const [showPrevention, setShowPrevention] = useState(true)
   const [fadeOut, setFadeOut] = useState(false)
   const [isTermsAccepted, setIsTermsAccepted] = useState(false)
+  
 
   const navigate = useNavigate();
   const API_URL = process.env.REACT_APP_API_URL
@@ -86,11 +87,16 @@ const Register = () => {
     }
 
     if (!email) {
-      setError("Veuillez écrire un mail.");
-      return;
+      setError("Veuillez écrire un mail.")
+      return
     } else if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-      setError("Veuillez entrer une adresse email valide.");
-      return;
+      setError("Veuillez entrer une adresse email valide.")
+      return
+    }
+
+    if (!dob) {
+      setError("Veuillez indiquer votre date de naissance")
+      return
     }
     
     setLoading(true)
@@ -135,6 +141,15 @@ const Register = () => {
   }
 
   const logGoogleUser = async () => {
+    if (!dob) {
+      setError("Veuillez indiquer votre date de naissance pour vous inscrire avec Google")
+      return
+    }
+    if (!isTermsAccepted) {
+      setError('Vous devez lire et accepter les conditions d\'utilisation pour vous inscrire avec Google');
+      return
+    }
+    
     setLoading(true)
     try {
       const response = await signInWithGooglePopup()
@@ -142,8 +157,11 @@ const Register = () => {
         email: response.user.email,
         pseudo: response.user.displayName,
         uid: response.user.uid,
+        dob,
         google: true,
       })
+     
+      
 
       navigate("/", { state: { showToastWelcome: true } })
     } catch (error) {
@@ -367,7 +385,7 @@ const Register = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register

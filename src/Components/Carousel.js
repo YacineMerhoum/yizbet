@@ -5,7 +5,7 @@ import Carousel from "react-bootstrap/Carousel"
 import traduction from "../traductions/traductions"
 import channel1 from "../images/TV/beinsport.png"
 import channel2 from "../images/TV/dazn.png"
-import Team1Img from "../images/Ligue1/psg.jpg"
+import Team1Img from "../images/Ligue1/Lyon_OM_joie_4.avif"
 import Match2Img from "../images/Ligue1/asse2.jpg"
 import LogoCompet from "../images/LogoCompetition/ligue1.png"
 import Button from "react-bootstrap/Button"
@@ -46,8 +46,8 @@ function DarkVariantExample() {
     return null;
   }
 
-  const gameOne = 83
-  const gameTwo = 85
+  const gameOne = 101
+  const gameTwo = 102
 
   // MATCH 1
    const homeTeamOdd1 = matchOdds.data[4].bookmakers[0].markets[0].outcomes[0].price

@@ -10,13 +10,16 @@ const AdminDashboard = () => {
   const [editPredictionId, setEditPredictionId] = useState(null)
   const [newPrediction, setNewPrediction] = useState("")
 
+  const API_URL = process.env.REACT_APP_API_URL
+
+
   useEffect(() => {
     fetchMatchOdds()
   }, []);
 
   const fetchMatchOdds = async () => {
     try {
-      const response = await axios.get("http://localhost:3008/api/admin/match-odds");
+      const response = await axios.get(`${API_URL}/api/admin/match-odds`);
       setMatchOdds(response.data)
       setLoading(false)
     } catch (err) {
@@ -32,7 +35,7 @@ const AdminDashboard = () => {
 
   const handleUpdatePrediction = async () => {
     try {
-      await axios.put(`http://localhost:3008/api/admin/match-odds/${editPredictionId}`, {
+      await axios.put(`${API_URL}/api/admin/match-odds/${editPredictionId}`, {
         prediction: newPrediction,
       });
       setEditPredictionId(null)

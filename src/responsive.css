@@ -58,12 +58,12 @@
         flex-direction: column;
     }
     .btnLogin {
-        height: 40px;
+        height: 40px !important;
         margin: 5px;
         font-size: 12px;
         color:var(--color-secondary);
         margin-right: 1%;
-        
+          
     }
     .btn2{
         width: 67px;
@@ -138,12 +138,16 @@
         right: 10%;
         z-index: 999;
       }
+      /* Footer */
+      .preventionFooter {
+        margin-left: -6%;
+        height: 40px !important;
+      }
       
-
      
 }
     
-    
+
 
 /* IPAD ECT.. */
 @media (min-width: 600px) and (max-width: 1100px) {

@@ -125,7 +125,7 @@ function BasicExample() {
                 <Button variant="outline-light" className="me-2 fontStrong bgButtonLogin btnLogin" as={Link} to="/register">
                   S'inscrire
                 </Button>
-                <Button variant="outline-light" className="fontStrong bgButtonLogin btnLogin btn2" as={Link} to="/login">
+                <Button variant="outline-light" className="me-2 fontStrong bgButtonLogin btnLogin" as={Link} to="/login">
                   Se connecter
                 </Button>
               </>

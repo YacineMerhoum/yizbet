@@ -9,6 +9,7 @@ import { getAuth } from "firebase/auth"
 import logo from "../images/premierlogo.png"
 import Seo from "../Components/Seo"
 import { useSelector } from "react-redux"
+import coin from "../images/Autres/coin.png"
 
 const API_URL = process.env.REACT_APP_API_URL
 
@@ -49,6 +50,7 @@ const Tokens = () => {
       const data = await response.json();
 
       if (data.url) {
+        // Redirection de l’utilisateur vers Stripe
         window.location.href = data.url
       }
     } catch (error) {
@@ -90,10 +92,13 @@ const Tokens = () => {
             </p>
           </div>
           <div className="">
-            <h3 className="text-center fontArchivoBold mb-5" style={{ color: "white", fontWeight: "bold" }}>
+            <h3 className="text-center fontArchivoBold mb-3" style={{ color: "white", fontWeight: "bold" }}>
               <em>Nos offres </em>
               <span>⚽</span>
             </h3>
+            <div className="text-center mb-5">
+              <img src={coin}  style={{ height: "120px" }} />
+            </div>
             <p className="gamesDay text-center" style={{ fontSize: "40px" }}>10 Tokens = 10€
               <button className="ms-5 m-1 btnOdsSkew" onClick={() => handleCheckout('price_1PZaHIJ7Z5palmd7vKDj0MuA')}>10€</button>
             </p>

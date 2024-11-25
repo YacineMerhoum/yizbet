@@ -51,7 +51,7 @@ const Footer = () => {
           <img src={logoStripe} alt='Stripe' style={{ height: "100px", transition: 'opacity 2.5s', opacity: logoVisible ? 1 : 0 }} />
         </div>
         
-        <img src={prevention} style={{ height: "15%" }} />
+        <img className='preventionFooter' src={prevention} style={{ height: "15%" }} />
       </div>
     </>
   )

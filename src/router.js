@@ -2,12 +2,10 @@
 import * as React from "react"
 import { createBrowserRouter } from "react-router-dom"
 import Home from "./Pages/Home"
-
 import Login from "./Pages/Login"
 import GamesExotics from "./Pages/GamesExotics"
 import Register from "./Pages/Register"
 import Tokens from "./Pages/Tokens"
-
 import TermsAndConditions from "./Pages/TermsAndConditions"
 import About from "./Pages/About"
 import MyBet from "./Pages/MyBet"
@@ -30,10 +28,6 @@ const router = createBrowserRouter([
   {
     path: "/games-exotics",
     element: <GamesExotics />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
   },
   {
     path: "/register",

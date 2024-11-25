@@ -82,7 +82,7 @@ const Login = () => {
           <Form.Control
             type='email'
             className='inputs'
-            placeholder='Enter email'
+            placeholder='Votre mail'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             style={{
@@ -97,7 +97,7 @@ const Login = () => {
           <Form.Control
             type='password'
             className='inputs'
-            placeholder='Password'
+            placeholder='Votre mot de passe'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             style={{
